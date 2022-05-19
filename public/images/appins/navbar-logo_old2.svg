@@ -1,0 +1,17 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" height="602" width="802" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <ellipse stroke-dasharray="5,2,2,2,2,2" ry="81.5" rx="280.5" id="svg_1" cy="237.75" cx="413" stroke-width="11" stroke="#000" fill="#ffff00"/>
+  <ellipse id="svg_2" cy="240.25" cx="203.5" stroke-width="1.5" stroke="#000" fill="#fff"/>
+  <text font-weight="bold" font-style="italic" stroke="#000" transform="matrix(5.299683570861816,0,0,2.2337348461151123,-755.4006573557854,-245.06986091658473) " xml:space="preserve" text-anchor="start" font-family="Euphoria, sans-serif" font-size="24" id="svg_4" y="221.0116" x="178.38691" fill-opacity="null" stroke-opacity="null" stroke-dasharray="5,2,2,2,2,2" stroke-width="0" fill="#000000">APPINS</text>
+ </g>
+</svg>
