@@ -7,10 +7,10 @@
   $('#password, #confirm_password').on('keyup', function () {
     if ($('#password').val() == $('#confirm_password').val()) {
       $('#message').html('Matching').css('color', 'green');
-      document.getElementById('submit').disabled = false;
+      // document.getElementById('submit').disabled = false;
     } else 
       $('#message').html('Not Matching').css('color', 'red');
-      document.getElementById('submit').disabled = true;
+      // document.getElementById('submit').disabled = true;
   });
 
 </script>
