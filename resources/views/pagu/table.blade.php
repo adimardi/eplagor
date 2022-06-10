@@ -1,8 +1,51 @@
-@section('js')
+          <div class="table-responsive p-3">
+            <table id="tablePagu" class="table table-resposive table-sm order-column nowrap align-items-center mb-0" width="100%">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary font-weight-bolder">No</th>
+                  <th class="text-uppercase text-secondary font-weight-bolder">Kode Satker</th>
+                  <th class="text-uppercase text-secondary font-weight-bolder">Nama Satker</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Departement</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Unit</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Program</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Giat</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Output</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Lokasi</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Kab Kota</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Dekon</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Sub Output</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Komponen</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Sub Komponen</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Akun</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode KPPN</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">No Item</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Nama Item</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Vol1</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Sat1</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Vol2</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Sat2</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Vol3</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Sat3</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Vol4</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Sat4</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Volume Kegiatan</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Satuan Kegiatan</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Harga Satuan</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Jumlah</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Aksi</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+
+<!-- datatables -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="{{asset('assets/DataTables/datatables.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/DataTables/FixedColumns-4.0.1/js/fixedColumns.dataTables.js')}}"></script>
 
 <script type="text/javascript">
   window.livewire.on('usersStored', () => {
-    $('#tablePagu').DataTable().ajax.reload();
+    $('#tableBaseline').DataTable().ajax.reload();
   });
 </script>
 
@@ -137,113 +180,4 @@
 
   });
 
-
-
 </script>
-<script>
-    function deleteData(ID) {
-    
-    swal.fire({
-        title: 'Apakah anda yakin?',
-        text: "Data yang anda pilih akan dihapus secara permanen!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Ya, Yakin!',
-        cancelButtonText: 'Tidak',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-          $.ajax({
-              url: "{{ route('user.hapus') }}",
-              type: 'POST',
-              data: {
-                _token: "{{ csrf_token() }}",
-                idnya: ID
-              },
-              error: function (xhr, status) {
-                Swal.fire('Data Gagal Dihapus!', '', 'error')
-              },
-              success: function (data) {
-                
-                // console.log(data);
-                var datanya = JSON.parse(data);
-                if(datanya.status) {
-                    Swal.fire('Data Berhasil Dihapus!', '', 'success')
-                  }
-              }
-          });
-          $('#tablePagu').DataTable().ajax.reload();
-        }
-    })
-  }
-
-</script>
-
-
-@stop
-
-@section('css')
-@stop
-
-
-
-@extends('layouts.app')
-
-@section('content')
-<div class="container-fluid py-4">
-  <div class="row">
-    <div class="col-12">
-      <div class="card my-4">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-            <h6 class="text-white text-capitalize ps-3">Table {{ $config['pageTitle']  }}</h6>
-          </div>
-        </div>
-        <div class="card-body px-0 pb-2">
-          <div class="table-responsive p-3">
-            <table id="tablePagu" class="table table-resposive table-sm order-column nowrap align-items-center mb-0" width="100%">
-              <thead>
-                <tr>
-                  <th class="text-uppercase text-secondary font-weight-bolder">No</th>
-                  <th class="text-uppercase text-secondary font-weight-bolder">Kode Satker</th>
-                  <th class="text-uppercase text-secondary font-weight-bolder">Nama Satker</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Departement</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Unit</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Program</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Kegiatan</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Output</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Lokasi</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Kab Kota</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Dekon</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Sub Output</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Komponen</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Sub Komponen</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Akun</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode KPPN</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">No Item</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Nama Item</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Vol1</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Sat1</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Vol2</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Sat2</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Vol3</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Sat3</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Vol4</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Sat4</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Volume Kegiatan</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Satuan Kegiatan</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Harga Satuan</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Jumlah</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Action</th>
-                </tr>
-              </thead>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-@endsection
-

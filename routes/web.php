@@ -41,6 +41,15 @@ Route::group(['middleware'=>['auth','verified']], function (){
 
     // Pagu
     Route::resource('pagu', 'PaguController');
+    Route::post('getpagu', 'PaguController@getpagu')->name('pagu.getpagu');
+    Route::get('indikatif', 'PaguController@indikatif')->name('pagu.indikatif');
+    Route::get('definitif', 'PaguController@definitif')->name('pagu.definitif');
+    Route::get('prioritas', 'PaguController@prioritas')->name('pagu.prioritas');
+
+    // Baseline
+    Route::resource('baseline', 'BaselineController');
+    Route::post('getpagu', 'BaselineController@getpagu')->name('baseline.getpagu');
+    Route::post('hapusBaseline', 'BaselineController@hapus')->name('baseline.hapus');
 
 });
 
@@ -55,4 +64,6 @@ Route::group(['as'=>'api.','prefix'=>'api','middleware'=>['auth','verified']], f
     Route::get('user', 'ApiController@apiUser')->name('user');
     Route::get('satker', 'ApiController@apiSatker')->name('satker');
     Route::get('pagu', 'ApiController@apiPagu')->name('pagu');
+    Route::get('baseline', 'ApiController@apiBaseline')->name('baseline');
+    Route::get('prioritas', 'ApiController@apiPrioritas')->name('prioritas');
 });

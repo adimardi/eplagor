@@ -1812,7 +1812,7 @@ progress {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5rem;
-  color: #495057;
+  color: #000;
   background-color: transparent;
   background-clip: padding-box;
   border: 1px solid #d2d6da;
@@ -1936,7 +1936,9 @@ progress {
             margin-inline-end: 0.75rem; }
 
 textarea.form-control {
-  min-height: unset; }
+  min-height: unset;
+  border: 1px solid;
+  padding: 0px 10px; }
 
 textarea.form-control-sm {
   min-height: unset; }
@@ -2442,6 +2444,7 @@ textarea.form-control-lg {
 
 .btn {
   display: inline-block;
+  margin-left: 15px;
   font-weight: 700;
   line-height: 1.667;
   color: #7b809a;
@@ -7210,7 +7213,7 @@ textarea.form-control-lg {
   color: #e91e63 !important; }
 
 .text-secondary {
-  color: #7b809a !important; }
+  color: #000000 !important; }
 
 .text-success {
   color: #4CAF50 !important; }
@@ -13647,7 +13650,8 @@ body.dark-version {
   .input-group,
   .input-group .input-group-text {
     transition: 0.2s ease;
-    border: none; }
+    border: 1px solid;
+    padding: 0px 10px; }
   .input-group > :not(:first-child):not(.dropdown-menu) {
     margin-left: 2px; }
   .input-group label {
@@ -13958,13 +13962,13 @@ label,
   max-width: 2rem; }
 
 .bg-gradient-primary {
-  background-image: linear-gradient(195deg, #EC407A 0%, #D81B60 100%); }
+  background-image: linear-gradient(195deg, #C62744 0%, #271C8B 100%); }
 
 .bg-gradient-secondary {
   background-image: linear-gradient(195deg, #747b8a 0%, #495361 100%); }
 
 .bg-gradient-success {
-  background-image: linear-gradient(195deg, #66BB6A 0%, #43A047 100%); }
+  background-image: linear-gradient(195deg,#66bb6a,#43a047); }
 
 .bg-gradient-info {
   background-image: linear-gradient(195deg, #49a3f1 0%, #1A73E8 100%); }
@@ -13979,7 +13983,7 @@ label,
   background-image: linear-gradient(195deg, #EBEFF4 0%, #CED4DA 100%); }
 
 .bg-gradient-dark {
-  background-image: linear-gradient(195deg, #42424a 0%, #191919 100%); }
+  background-image: linear-gradient(195deg, #1c1c97 0%, #931717 100%); }
 
 .bg-gradient-faded-primary {
   background-image: radial-gradient(370px circle at 80% 50%, rgba(233, 30, 99, 0.6) 0, #c1134e 100%); }
@@ -17538,3 +17542,48 @@ pre[class*="language-"] {
     overflow: auto !important; } }
 
 /*# sourceMappingURL=material-dashboard.css.map */
+
+
+#chart, .chart-box {
+    padding-top: 20px;
+    padding-left: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 22px 35px -16px rgba(0,0,0, 0.1);
+}
+
+select.flat-select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #008FFB url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'60px\' height=\'60px\'><polyline fill=\'white\' points=\'46.139,15.518 25.166,36.49 4.193,15.519\'/></svg>") no-repeat scroll right 2px top 9px / 16px 16px;
+    border: 0 none;
+    border-radius: 3px;
+    color: #fff;
+    font-family: arial,tahoma;
+    font-size: 16px;
+    font-weight: bold;
+    outline: 0 none;
+    height: 33px;
+    padding: 5px 20px 5px 10px;
+    text-align: center;
+    text-indent: 0.01px;
+    text-overflow: "";
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease 0s;
+    width: auto;
+    -webkit-transition: 0.3s ease all;
+    -moz-transition: 0.3s ease all;
+    -ms-transition: 0.3s ease all;
+    -o-transition: 0.3s ease all;
+    transition: 0.3s ease all;
+  }
+  select.flat-select:focus, select.flat-select:hover {
+    border: 0;
+    outline: 0;
+  }
+  
+
+.apexcharts-canvas {
+    margin: 0 auto;
+}

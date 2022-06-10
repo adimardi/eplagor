@@ -22,7 +22,7 @@ use Cache;
 class PaguController extends Controller
 {
     protected $session;
-    private $title = 'Pagu';
+    private $title = 'Pagu Awal';
 
     public function __construct()
     {
@@ -116,5 +116,58 @@ class PaguController extends Controller
     {
 
     }
+
+    // Detail Pagu
+    public function getpagu(Request $request)
+    {
+        $pagu = pagu::find($request->unik);
+        return response()->json($pagu);
+    }
+
+    // Indikatif
+    public function indikatif() 
+    {
+        $this->config = [
+            'title'     => 'Pagu Indikatif',
+            'pageTitle' => 'Pagu Indikatif',
+        ];
+
+        $data = [
+                    'config' => $this->config,
+                ];
+
+        return view('pagu.indikatif', $data);
+    } 
+
+    // Definitif
+    public function definitif() 
+    {
+        $this->config = [
+            'title'     => 'Pagu Definitif',
+            'pageTitle' => 'Pagu Definitif',
+        ];
+
+        $data = [
+                    'config' => $this->config,
+                ];
+
+        return view('pagu.definitif', $data);
+    }  
+
+    // Skala Prioritas
+    public function prioritas() 
+    {
+        $this->config = [
+            'title'     => 'Skala Prioritas',
+            'pageTitle' => 'Skala Prioritas',
+        ];
+
+        $data = [
+                    'config' => $this->config,
+                ];
+
+        return view('pagu.prioritas', $data);
+    }  
+  
 
 }

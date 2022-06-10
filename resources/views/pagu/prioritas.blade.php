@@ -44,7 +44,7 @@
           processing: true,
           serverSide: true,
           ajax: {
-              "url"  : "{{ route ('api.pagu') }}", 
+              "url"  : "{{ route ('api.prioritas') }}", 
               "data" : function (d) {
                       d.filter_wilayah = $('#filter_wilayah').val();
                       d.filter_eselon = $('#filter_eselon').val();
@@ -154,7 +154,7 @@
     }).then((result) => {
         if (result.isConfirmed) {
           $.ajax({
-              url: "{{ route('user.hapus') }}",
+              url: "{{ route('baseline.hapus') }}",
               type: 'POST',
               data: {
                 _token: "{{ csrf_token() }}",

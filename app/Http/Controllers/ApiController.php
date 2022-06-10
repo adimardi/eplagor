@@ -54,6 +54,9 @@ use Session;
 
 use App\Traits\filter;
 
+//
+use App\baseline;
+
 
 class ApiController extends Controller
 {
@@ -166,14 +169,69 @@ class ApiController extends Controller
         $this->filterKatagori($pagu);
 
         return Datatables::eloquent($pagu)
-                        // ->addColumn('action', function($pagu){
+                        ->addColumn('action', function($pagu){
+                            $btn =   '<button type="button" class="btn btn-info" type="button" title="Take" onclick="take(\''.$pagu->id.'\')"><i class="fa fa-edit"></i></button>';         
+                            return $btn;
+                        })
+
+                        ->rawColumns(['action'])
+                        ->toJson();
+    }
+
+    
+// PAGU
+    // -- BASELINE
+    public function apiBaseline()
+    {
+        $base = baseline::where('thang', Session::get('thang'));
+
+        $base = $base->with(['reffsatker']);
+        $this->filterUser($base);
+        $this->filterKatagori($base);
+
+        return Datatables::eloquent($base)
+                        ->addColumn('action', function($base){
        
-                        //    $btn =   '<a href="' . route('belanjamodal.show', Crypt::encrypt($pagu->id)) .'" class="btn btn-info btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="View" ><i class="fa fa-eye fa-xs"></i></a>';
-                        // //    $btn = $btn.'<a href="' . route('belanjamodal.edit', Crypt::encrypt($pagu->id)) .'" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Edit" ><i class="fa fa-edit fa-xs"></i></a>';
-                        // //    $btn = $btn.'<a href="' . route('belanjamodal.destroy', Crypt::encrypt($pagu->id)) .'" class="btn btn-danger btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="javascript:void(0);"><i class="fa fa-trash fa-xs"></i></a>';             
-                        //     return $btn;
-                        // })
-                        // ->rawColumns(['action'])
+                        $btn =   '  <button type="button" class="btn btn-info btn-round ml-0" title="Edit" onclick="take(\''.$base->id.'\')">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round ml-0" data-original-title="Hapus" title="Hapus" onclick="deleteData(\''.$base->id.'\')">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                 '; 
+
+                        return $btn;
+                        })
+
+                        ->rawColumns(['action'])
+                        ->toJson();
+    }
+
+    // PRIORITAS
+    public function apiPrioritas()
+    {
+        $prioritas = baseline::where('thang', Session::get('thang'))
+                        ->where('prioritas', 'Y');
+
+        $prioritas = $prioritas->with(['reffsatker']);
+        $this->filterUser($prioritas);
+        $this->filterKatagori($prioritas);
+
+        return Datatables::eloquent($prioritas)
+                        ->addColumn('action', function($prioritas){
+       
+                        $btn =   '  <button type="button" class="btn btn-info btn-round ml-0" title="Edit" onclick="take(\''.$prioritas->id.'\')">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round ml-0" data-original-title="Hapus" title="Hapus" onclick="deleteData(\''.$prioritas->id.'\')">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                 '; 
+
+                        return $btn;
+                        })
+
+                        ->rawColumns(['action'])
                         ->toJson();
     }
 

@@ -19,12 +19,74 @@
         </a>
       </li>
 
+      <li class="nav-item mt-3">
+        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pagu</h6>
+      </li>
+
       <li class="nav-item">
         <a class="nav-link text-white {{ request()->routeIs('pagu.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('pagu.index')}}"">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="material-icons opacity-10">dashboard</i>
           </div>
-          <span class="nav-link-text ms-1">Pagu</span>
+          <span class="nav-link-text ms-1">Pagu Awal</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white {{ request()->routeIs('baseline.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('baseline.index')}}">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">dashboard</i>
+          </div>
+          <span class="nav-link-text ms-1">Baseline</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white {{ request()->routeIs('baseline.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('baseline.index')}}">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">dashboard</i>
+          </div>
+          <span class="nav-link-text ms-1">Data Dukung Baseline</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white {{ request()->routeIs('pagu.prioritas') ? ' active bg-gradient-primary' : '' }}" href="{{route('pagu.prioritas')}}">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">dashboard</i>
+          </div>
+          <span class="nav-link-text ms-1">Skala Prioritas</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white {{ request()->routeIs('pagu.indikatif') ? ' active bg-gradient-primary' : '' }}" href="{{route('pagu.indikatif')}}">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">dashboard</i>
+          </div>
+          <span class="nav-link-text ms-1">Pagu Indikatif</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white {{ request()->routeIs('pagu.definitif') ? ' active bg-gradient-primary' : '' }}" href="{{route('pagu.definitif')}}"">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">dashboard</i>
+          </div>
+          <span class="nav-link-text ms-1">Pagu Definitif</span>
+        </a>
+      </li>
+
+      <li class="nav-item mt-3">
+        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Kenaikan Kelas</h6>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white {{ request()->routeIs('pagu.prioritas') ? ' active bg-gradient-primary' : '' }}" href="{{route('pagu.prioritas')}}">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">dashboard</i>
+          </div>
+          <span class="nav-link-text ms-1">Usulan Kenaikan Kelas</span>
         </a>
       </li>
 
@@ -32,6 +94,7 @@
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Administrator</h6>
       </li>
+
       <li class="nav-item">
         <a class="nav-link text-white {{ request()->routeIs('user.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('user.index')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
