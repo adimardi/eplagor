@@ -27,6 +27,8 @@
     {{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/yadcf-0.9.3/jquery.dataTables.yadcf.css')}}"/> --}}
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+
+    <link rel="stylesheet" href="{{asset('assets/css/choices.min.css')}}"/>
     @section('js')    
     
     @show
@@ -79,6 +81,30 @@
     {{-- <script type="text/javascript" src="{{asset('assets/yadcf-0.9.3/jquery.dataTables.yadcf.js')}}"></script> --}}
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="{{asset('assets/js/plugins/choices.min.js')}}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+      if (document.getElementById("choices-button")) {
+        var element = document.getElementById("choices-button");
+        const example = new Choices(element, {});
+      }
+
+      var choicesTags = document.getElementById("choices-tags");
+      var color = choicesTags.dataset.color;
+      if (choicesTags) {
+        const example = new Choices(choicesTags, {
+          delimiter: ",",
+          editItems: true,
+          maxItemCount: 10,
+          removeItemButton: true,
+          addItems: true,
+          classNames: {
+            item: "badge rounded-pill choices-" + color + " me-2"
+          }
+        });
+      }
+    </script>
 
     @section('js')    
     

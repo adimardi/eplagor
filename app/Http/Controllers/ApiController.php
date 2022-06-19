@@ -57,12 +57,13 @@ use App\Traits\filter;
 //
 use App\baseline;
 
+// usulan kenaikan kelas
+use App\usulan_pa;
+
 
 class ApiController extends Controller
 {
     use filter;
-
-
 
     public function __construct()
     {
@@ -234,6 +235,37 @@ class ApiController extends Controller
                         ->rawColumns(['action'])
                         ->toJson();
     }
+
+// START USULAN KENAIKAN KELAS
+
+    // -- PERADILAN AGAMA
+    public function apiUsulanKenaikanKelasPa()
+    {
+        $pa = usulan_pa::orderBy('id', 'desc');
+
+        $pa = $pa->with(['reffsatker']);
+        $this->filterUser($pa);
+        $this->filterKatagori($pa);
+
+        return Datatables::eloquent($pa)
+                        ->addColumn('action', function($pa){
+       
+                        $btn =   '  <a href="'.route('usulan.kenaikankelaspa.show', Crypt::encrypt($pa->id)).'" class="btn btn-sm btn-info ms-0 mb-0" title="Detail">
+                                        <i class="fa fa-eye" style="font-size: 12px; line-height: 12px;"></i>
+                                    </a>
+                                    <button type="button" rel="tooltip" class="btn btn-sm btn-danger ms-0 mb-0" data-original-title="Hapus" title="Hapus" onclick="deleteData(\''.$pa->id.'\')">
+                                        <i class="fa fa-trash" style="font-size: 12px; line-height: 12px;"></i>
+                                    </button>
+                                 '; 
+
+                        return $btn;
+                        })
+
+                        ->rawColumns(['action'])
+                        ->toJson();
+    }
+
+// END USULAN KENAIKAN KELAS
 
     public function apiBelanjaBarang()
     {

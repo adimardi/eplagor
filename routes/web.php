@@ -51,6 +51,23 @@ Route::group(['middleware'=>['auth','verified']], function (){
     Route::post('getpagu', 'BaselineController@getpagu')->name('baseline.getpagu');
     Route::post('hapusBaseline', 'BaselineController@hapus')->name('baseline.hapus');
 
+    // Usulan
+    Route::group(['as' => 'usulan.', 'prefix' => 'usulan', 'namespace' => 'Usulan'], function () {
+
+        // Kenaikan Kelas PA
+        Route::group(['as' => 'kenaikankelaspa.', 'prefix' => 'kenaikankelaspa'], function () {
+            Route::post('table', ['as' => 'table', 'uses' => 'KenaikanKelasPaController@table']);
+        });
+        Route::resource('kenaikankelaspa', 'KenaikanKelasPaController');
+
+        // Kenaikan Kelas PN
+        Route::group(['as' => 'kenaikankelaspn.', 'prefix' => 'kenaikankelaspn'], function () {
+            Route::post('table', ['as' => 'table', 'uses' => 'KenaikanKelasPnController@table']);
+        });
+        Route::resource('kenaikankelaspn', 'KenaikanKelasPnController');
+
+    });
+
 });
 
 
@@ -66,4 +83,7 @@ Route::group(['as'=>'api.','prefix'=>'api','middleware'=>['auth','verified']], f
     Route::get('pagu', 'ApiController@apiPagu')->name('pagu');
     Route::get('baseline', 'ApiController@apiBaseline')->name('baseline');
     Route::get('prioritas', 'ApiController@apiPrioritas')->name('prioritas');
+
+    // usulan kenaikan kelas PA
+    Route::get('usulankenaikankelaspa', 'ApiController@apiUsulanKenaikanKelasPa')->name('usulankenaikankelaspa');
 });

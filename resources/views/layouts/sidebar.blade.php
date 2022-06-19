@@ -19,6 +19,25 @@
         </a>
       </li>
 
+      <!--
+      <li class="nav-item">
+        <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link text-white active collapsed" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
+        <i class="material-icons-round opacity-10">dashboard</i>
+        <span class="nav-link-text ms-2 ps-1">PAGU ANGGARAN</span>
+        </a>
+        <div class="collapse" id="dashboardsExamples" style="">
+          <ul class="nav ">
+            <li class="nav-item ">
+              <a class="nav-link text-white " href="../../pages/dashboards/analytics.html">
+              <span class="sidenav-mini-icon"> A </span>
+              <span class="sidenav-normal  ms-2  ps-1"> DIPA AWAL </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      -->
+
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pagu</h6>
       </li>
@@ -78,15 +97,24 @@
       </li>
 
       <li class="nav-item mt-3">
-        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Kenaikan Kelas</h6>
+        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Usulan Kenaikan Kelas</h6>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link text-white {{ request()->routeIs('pagu.prioritas') ? ' active bg-gradient-primary' : '' }}" href="{{route('pagu.prioritas')}}">
+        <a class="nav-link text-white {{ request()->routeIs('usulan.kenaikankelaspa.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('usulan.kenaikankelaspa.index')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="material-icons opacity-10">dashboard</i>
           </div>
-          <span class="nav-link-text ms-1">Usulan Kenaikan Kelas</span>
+          <span class="nav-link-text ms-1">Peradilan Agama</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white {{ request()->routeIs('usulan.kenaikankelaspn.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('usulan.kenaikankelaspn.index')}}">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">dashboard</i>
+          </div>
+          <span class="nav-link-text ms-1">Peradilan Umum</span>
         </a>
       </li>
 
