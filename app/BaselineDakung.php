@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Baseline extends Model
+class BaselineDakung extends Model
 {
-    protected $table = "baseline";
+    protected $table = "baseline_dakung";
     protected $guarded = [];
 
     public function reffsatker ()

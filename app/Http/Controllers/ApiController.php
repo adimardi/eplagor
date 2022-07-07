@@ -54,11 +54,14 @@ use Session;
 
 use App\Traits\filter;
 
-//
-use App\baseline;
+// Baseline
+use App\Baseline;
+use App\BaselineDakung;
+use App\UraianAnggaran;
 
 // usulan kenaikan kelas
-use App\usulan_pa;
+use App\UsulanKelasPa;
+//use App\UsulanKelasPn;
 
 
 class ApiController extends Controller
@@ -171,37 +174,8 @@ class ApiController extends Controller
 
         return Datatables::eloquent($pagu)
                         ->addColumn('action', function($pagu){
-                            $btn =   '<button type="button" class="btn btn-info" type="button" title="Take" onclick="take(\''.$pagu->id.'\')"><i class="fa fa-edit"></i></button>';         
+                            $btn =   '<button type="button" class="btn btn-info btn-round ml-0 mb-0" type="button" title="Take" onclick="take(\''.$pagu->id.'\')"><i class="fa fa-edit"></i></button>';         
                             return $btn;
-                        })
-
-                        ->rawColumns(['action'])
-                        ->toJson();
-    }
-
-    
-// PAGU
-    // -- BASELINE
-    public function apiBaseline()
-    {
-        $base = baseline::where('thang', Session::get('thang'));
-
-        $base = $base->with(['reffsatker']);
-        $this->filterUser($base);
-        $this->filterKatagori($base);
-
-        return Datatables::eloquent($base)
-                        ->addColumn('action', function($base){
-       
-                        $btn =   '  <button type="button" class="btn btn-info btn-round ml-0" title="Edit" onclick="take(\''.$base->id.'\')">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round ml-0" data-original-title="Hapus" title="Hapus" onclick="deleteData(\''.$base->id.'\')">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                 '; 
-
-                        return $btn;
                         })
 
                         ->rawColumns(['action'])
@@ -211,61 +185,392 @@ class ApiController extends Controller
     // PRIORITAS
     public function apiPrioritas()
     {
-        $prioritas = baseline::where('thang', Session::get('thang'))
-                        ->where('prioritas', 'Y');
+        $base = baseline::where('thang', Session::get('thang'))
+                                ->where('prioritas', 'Y');
 
-        $prioritas = $prioritas->with(['reffsatker']);
-        $this->filterUser($prioritas);
-        $this->filterKatagori($prioritas);
+        $base = $base->with(['reffsatker']);
+        $this->filterUser($base);
+        $this->filterKatagori($base);
 
-        return Datatables::eloquent($prioritas)
-                        ->addColumn('action', function($prioritas){
-       
-                        $btn =   '  <button type="button" class="btn btn-info btn-round ml-0" title="Edit" onclick="take(\''.$prioritas->id.'\')">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round ml-0" data-original-title="Hapus" title="Hapus" onclick="deleteData(\''.$prioritas->id.'\')">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                 '; 
+        return Datatables::eloquent($base)
+            ->addColumn('action', function($base){
+                $btn =   '<button type="button" class="btn btn-danger ml-0 mb-0" type="button" title="Hapus Data" onclick="deleteData('.$base->unik.')" style="padding: 8px 13px;"><i class="fas fa-trash"></i></button>';  
 
-                        return $btn;
-                        })
+                return $btn;
+            })
 
-                        ->rawColumns(['action'])
-                        ->toJson();
+        ->rawColumns(['action'])
+        ->toJson();
     }
+
+
+    // -- START BASELINE 1
+    public function apiBaseline1()
+    {
+        $base = baseline::where('thang', Session::get('thang'));
+
+        $base = $base->with(['reffsatker']);
+        $this->filterUser($base);
+        $this->filterKatagori($base);
+
+        return Datatables::eloquent($base)->toJson();
+    }
+
+    public function apiPaguBaseline1()
+    {
+        $pagu = pagu::where('thang', Session::get('thang'));
+
+        $pagu = $pagu->with(['reffsatker']);
+        $this->filterUser($pagu);
+        $this->filterKatagori($pagu);
+
+        return Datatables::eloquent($pagu)
+            ->addColumn('action', function($pagu){
+                $btn =   '<button type="button" class="btn btn-info ml-0 mb-0" type="button" title="Gunakan Data" onclick="use(\''.$pagu->id.'\')" style="padding: 8px 13px;"><i class="fas fa-arrow-down"></i></button>';  
+
+                return $btn;
+            })
+
+        ->rawColumns(['action'])
+        ->toJson();
+    }
+
+    public function apiDakungBaseline1()
+    {
+        $base = Baseline::select(
+                                    'reffsatker_id',
+                                    'kdunit',
+                                    'kdprogram',
+                                    'kdgiat',
+                                    'kdoutput',
+                                    'kdsoutput',
+                                    'kdkmpnen',
+                                    DB::raw('SUM(jumlah) as total') 
+                                )
+                        ->where('thang', Session::get('thang'))
+                        ->groupBy('reffsatker_id', 'kdunit', 'kdprogram', 'kdgiat', 'kdoutput', 'kdsoutput', 'kdkmpnen');
+
+        $base = $base->with(['reffsatker']);
+        $this->filterUser($base);
+        $this->filterKatagori($base);
+
+        return Datatables::eloquent($base)
+            ->addColumn('file', function($base){
+                $unik = $base->reffsatker_id.$base->kdunit.$base->kdprogram.$base->kdgiat.$base->kdoutput.$base->kdsoutput.$base->kdkmpnen;
+                $files = BaselineDakung::where('id', $unik)->first();
+
+                if(!empty($files)){
+                    $btn =  '
+                                <a href="'.asset('storage/Dokumen_baseline/'.$unik.'/'.$files->fileTor).'" data-toggle="tooltip" data-placement="top" title="File TOR" target="_blank"><i class="fa fa-file-pdf-o fa-2x text-success" aria-hidden="true"></i>
+                                </a>
+                                <a href="'.asset('storage/Dokumen_baseline/'.$unik.'/'.$files->fileRab).'" data-toggle="tooltip" data-placement="top" title="File RAB" style="margin-left: 5px;" target="_blank"><i class="fa fa-file-pdf-o fa-2x text-success" aria-hidden="true"></i>
+                                </a>
+                                <a href="'.asset('storage/Dokumen_baseline/'.$unik.'/'.$files->fileLainnya).'" data-toggle="tooltip" data-placement="top" title="File Lainnya" style="margin-left: 5px;" target="_blank"><i class="fa fa-file-pdf-o fa-2x text-success" aria-hidden="true"></i>
+                                </a>
+                            ';
+                } else {
+                    $btn =  '
+                                <a href="javascript:void(0)" class="btn btn-danger btn-upload ms-0 mb-0" style="padding: 8px 13px;" data-toggle="tooltip" data-placement="top" title="Upload dokumen" ><i class="fa fa-upload" aria-hidden="true"></i></a>
+                            ';   
+                }
+
+                return $btn;
+            })
+
+            ->addColumn('coa', function($base){
+                $kode = $base->kdgiat.'.'.$base->kdoutput.'.'.$base->kdsoutput.'.'.$base->kdkmpnen;
+                return ($kode);
+            })
+
+            ->addColumn('deskripsi', function($base){
+                $kode = $base->kdgiat.'.'.$base->kdoutput.'.'.$base->kdsoutput.'.'.$base->kdkmpnen;
+                $desk = UraianAnggaran::where('kode', $base->kdgiat.'.'.$base->kdoutput.'.'.$base->kdsoutput.'.'.$base->kdkmpnen)->first();
+                if(!empty($desk)){
+                    return ($desk->deskripsi);
+                } else {
+                    return ('-');
+                }
+            })
+
+        ->rawColumns(['coa', 'deskripsi', 'file'])
+        ->toJson();
+    }
+    // -- END BASELINE 1
+
+    // -- START BASELINE 3
+    public function apiBaseline3()
+    {
+        $base = Baseline::select(
+                                    'reffsatker_id',
+                                    DB::raw('SUM(jumlah) as total')
+                                )
+                        ->where('thang', Session::get('thang'))
+                        ->groupBy('reffsatker_id');
+
+        $base = $base->with(['reffsatker']);
+        $this->filterUser($base);
+        $this->filterKatagori($base);
+
+        return Datatables::eloquent($base)
+            ->addColumn('satker', function($base){
+                $btn =  '
+                            <a href="'.route('baseline3.rincian', Crypt::encrypt($base->reffsatker_id)).'" style="padding: 8px 13px;" title="Detail">
+                                '.$base->reffsatker->nama_satker_lengkap.'
+                            </a>
+                        ';
+
+                return $btn;
+            })
+
+            ->addColumn('total_belanja_pegawai', function($base){
+                $totals = Baseline::where('thang', Session::get('thang'))
+                                    ->where('reffsatker_id', $base->reffsatker_id)
+                                    ->where('kdakun','LIKE','51%')
+                                    ->sum('jumlah');
+                return($totals);
+            })
+
+            ->addColumn('total_belanja_barang_operasional', function($base){
+                $totals = Baseline::where('thang', Session::get('thang'))
+                                    ->where('reffsatker_id', $base->reffsatker_id)
+                                    ->where('kdakun','LIKE', '52%')
+                                    ->where('operasional', 'Y')
+                                    ->sum('jumlah');
+                return($totals);
+            })
+
+            ->addColumn('total_belanja_barang_nonoperasional', function($base){
+                $totals = Baseline::where('thang', Session::get('thang'))
+                                    ->where('reffsatker_id', $base->reffsatker_id)
+                                    ->where('kdakun','LIKE', '52%')
+                                    ->where('operasional', 'T')
+                                    ->sum('jumlah');
+                return($totals);
+            })
+
+            ->addColumn('total_belanja_modal_tanah', function($base){
+                $totals = Baseline::where('thang', Session::get('thang'))
+                                    ->where('reffsatker_id', $base->reffsatker_id)
+                                    ->where(\DB::raw('substr(kdakun, 1, 3)'), '=' , 531)
+                                    ->sum('jumlah');
+                return($totals);
+            })
+
+            ->addColumn('total_belanja_modal_mesin', function($base){
+                $totals = Baseline::where('thang', Session::get('thang'))
+                                    ->where('reffsatker_id', $base->reffsatker_id)
+                                    ->where(\DB::raw('substr(kdakun, 1, 3)'), '=' , 532)
+                                    ->sum('jumlah');
+                return($totals);
+            })
+
+            ->addColumn('total_belanja_modal_gedung', function($base){
+                $totals = Baseline::where('thang', Session::get('thang'))
+                                    ->where('reffsatker_id', $base->reffsatker_id)
+                                    ->where(\DB::raw('substr(kdakun, 1, 3)'), '=' , 533)
+                                    ->sum('jumlah');
+                return($totals);
+            })
+
+            ->addColumn('aksi', function($base){
+                $btn =  '
+                            <a href="' . route('baseline3.dakung', Crypt::encrypt($base->reffsatker_id)) .'" title="Detail">
+                                Lihat File
+                            </a>
+                        ';
+
+                return $btn;
+            })
+
+        ->rawColumns([
+                        'satker', 
+                        'total_belanja_pegawai', 
+                        'total_belanja_barang_operasional', 
+                        'total_belanja_barang_nonoperasional', 
+                        'total_belanja_modal_tanah', 
+                        'total_belanja_modal_mesin', 
+                        'total_belanja_modal_gedung', 
+                        'aksi'
+                    ])
+        ->toJson();
+    }
+
+    public function apiDataBaseline3()
+    {
+        $base = baseline::where('thang', Session::get('thang'))
+                        ->where('reffsatker_id', request('unik'));
+
+        $base = $base->with(['reffsatker']);
+        $this->filterUser($base);
+        $this->filterKatagori($base);
+
+        return Datatables::eloquent($base)->toJson();
+    }
+
+    public function apiPaguBaseline3()
+    {
+        $pagu = pagu::where('thang', Session::get('thang'))
+                    ->where('reffsatker_id', request('unik'));
+
+        $pagu = $pagu->with(['reffsatker']);
+        $this->filterUser($pagu);
+        $this->filterKatagori($pagu);
+
+        return Datatables::eloquent($pagu)
+            ->addColumn('action', function($pagu){
+                $btn =   '<button type="button" class="btn btn-info ml-0 mb-0" type="button" title="Gunakan Data" onclick="use(\''.$pagu->id.'\')" style="padding: 8px 13px;"><i class="fas fa-arrow-down"></i></button>';  
+
+                return $btn;
+            })
+
+        ->rawColumns(['action'])
+        ->toJson();
+    }
+
+    public function apiDakungBaseline3()
+    {
+        $base = Baseline::select(
+                                    'reffsatker_id',
+                                    'kdunit',
+                                    'kdprogram',
+                                    'kdgiat',
+                                    'kdoutput',
+                                    'kdsoutput',
+                                    'kdkmpnen',
+                                    DB::raw('SUM(jumlah) as total') 
+                                )
+                        ->where('thang', Session::get('thang'))
+                        ->where('reffsatker_id', request('unik'))
+                        ->groupBy('reffsatker_id', 'kdunit', 'kdprogram', 'kdgiat', 'kdoutput', 'kdsoutput', 'kdkmpnen');
+
+        $base = $base->with(['reffsatker']);
+        $this->filterUser($base);
+        $this->filterKatagori($base);
+
+        return Datatables::eloquent($base)
+            ->addColumn('file', function($base){
+                $unik = $base->reffsatker_id.$base->kdunit.$base->kdprogram.$base->kdgiat.$base->kdoutput.$base->kdsoutput.$base->kdkmpnen;
+                $files = BaselineDakung::where('id', $unik)->first();
+
+                if(!empty($files)){
+                    $btn =  '
+                                <a href="'.asset('storage/Dokumen_baseline/'.$unik.'/'.$files->fileTor).'" data-toggle="tooltip" data-placement="top" title="File TOR" target="_blank"><i class="fa fa-file-pdf-o fa-2x text-success" aria-hidden="true"></i>
+                                </a>
+                                <a href="'.asset('storage/Dokumen_baseline/'.$unik.'/'.$files->fileRab).'" data-toggle="tooltip" data-placement="top" title="File RAB" style="margin-left: 5px;" target="_blank"><i class="fa fa-file-pdf-o fa-2x text-success" aria-hidden="true"></i>
+                                </a>
+                                <a href="'.asset('storage/Dokumen_baseline/'.$unik.'/'.$files->fileLainnya).'" data-toggle="tooltip" data-placement="top" title="File Lainnya" style="margin-left: 5px;" target="_blank"><i class="fa fa-file-pdf-o fa-2x text-success" aria-hidden="true"></i>
+                                </a>
+                            ';
+                } else {
+                    $btn =  '
+                                <a href="javascript:void(0)" class="btn btn-danger btn-upload ms-0 mb-0" style="padding: 8px 13px;" data-toggle="tooltip" data-placement="top" title="Upload dokumen" ><i class="fa fa-upload" aria-hidden="true"></i></a>
+                            ';   
+                }
+
+                return $btn;
+            })
+
+            ->addColumn('coa', function($base){
+                $kode = $base->kdgiat.'.'.$base->kdoutput.'.'.$base->kdsoutput.'.'.$base->kdkmpnen;
+                return ($kode);
+            })
+
+            ->addColumn('deskripsi', function($base){
+                $kode = $base->kdgiat.'.'.$base->kdoutput.'.'.$base->kdsoutput.'.'.$base->kdkmpnen;
+                $desk = UraianAnggaran::where('kode', $base->kdgiat.'.'.$base->kdoutput.'.'.$base->kdsoutput.'.'.$base->kdkmpnen)->first();
+                if(!empty($desk)){
+                    return ($desk->deskripsi);
+                } else {
+                    return ('-');
+                }
+            })
+
+        ->rawColumns(['coa', 'deskripsi', 'file'])
+        ->toJson();
+    }
+    // -- END BASELINE 3
 
 // START USULAN KENAIKAN KELAS
 
-    // -- PERADILAN AGAMA
+
+
+// -- START KENAIKAN KELAS PERADILAN AGAMA
     public function apiUsulanKenaikanKelasPa()
     {
-        $pa = usulan_pa::orderBy('id', 'desc');
+        $pa = UsulanKelasPa::orderBy('id', 'desc');
 
         $pa = $pa->with(['reffsatker']);
         $this->filterUser($pa);
         $this->filterKatagori($pa);
 
         return Datatables::eloquent($pa)
-                        ->addColumn('action', function($pa){
-       
-                        $btn =   '  <a href="'.route('usulan.kenaikankelaspa.show', Crypt::encrypt($pa->id)).'" class="btn btn-sm btn-info ms-0 mb-0" title="Detail">
-                                        <i class="fa fa-eye" style="font-size: 12px; line-height: 12px;"></i>
-                                    </a>
-                                    <button type="button" rel="tooltip" class="btn btn-sm btn-danger ms-0 mb-0" data-original-title="Hapus" title="Hapus" onclick="deleteData(\''.$pa->id.'\')">
-                                        <i class="fa fa-trash" style="font-size: 12px; line-height: 12px;"></i>
-                                    </button>
-                                 '; 
+            ->addColumn('usulan', function($pa){
+                return($pa->usul_peningkatan_ke);
+            })
 
-                        return $btn;
-                        })
+            ->addColumn('usulan_ke', function($pa){
+                return('Usulan ke '.$pa->usulan_ke);
+            })
 
-                        ->rawColumns(['action'])
-                        ->toJson();
+            ->addColumn('total_cg', function($pa){
+                return($pa->jumlah_cg_tahun1+$pa->jumlah_cg_tahun2+$pa->jumlah_cg_tahun3);
+            })
+
+            ->addColumn('rata_cg', function($pa){
+                $totalcg = $pa->jumlah_cg_tahun1+$pa->jumlah_cg_tahun2+$pa->jumlah_cg_tahun3;
+                $rata = $totalcg/3;
+                return(round($rata));
+            })
+
+            ->addColumn('total_ct', function($pa){
+                return($pa->jumlah_cg_tahun1+$pa->jumlah_cg_tahun2+$pa->jumlah_cg_tahun3);
+            })
+
+            ->addColumn('rata_ct', function($pa){
+                $totalct = $pa->jumlah_ct_tahun1+$pa->jumlah_ct_tahun2+$pa->jumlah_ct_tahun3;
+                $rata = $totalct/3;
+                return(round($rata));
+            })
+
+            ->addColumn('total_p', function($pa){
+                return($pa->jumlah_p_tahun1+$pa->jumlah_p_tahun2+$pa->jumlah_p_tahun3);
+            })
+
+            ->addColumn('rata_p', function($pa){
+                $totalp = $pa->jumlah_p_tahun1+$pa->jumlah_p_tahun2+$pa->jumlah_p_tahun3;
+                $rata = $totalp/3;
+                return(round($rata));
+            })
+            
+            ->addColumn('action', function($pa){
+                $btn =  '  <a href="'.route('usulan.kenaikankelaspa.show', Crypt::encrypt($pa->id)).'" class="btn btn-sm btn-info ms-0 mb-0" title="Detail">
+                                <i class="fa fa-eye" style="font-size: 12px; line-height: 12px;"></i>
+                            </a>
+                            <button type="button" rel="tooltip" class="btn btn-sm btn-danger ms-0 mb-0" data-original-title="Hapus" title="Hapus" onclick="deleteData(\''.$pa->id.'\')">
+                                <i class="fa fa-trash" style="font-size: 12px; line-height: 12px;"></i>
+                            </button>
+                        '; 
+
+                return $btn;
+            })
+
+        ->rawColumns([
+                        'usulan',
+                        'usulan_ke',
+                        'total_cg',
+                        'rata_cg',
+                        'total_ct',
+                        'rata_ct',
+                        'total_p',
+                        'rata_p',
+                    ])
+        ->toJson();
     }
+// -- END KENAIKAN KELAS PERADILAN AGAMA
 
-// END USULAN KENAIKAN KELAS
+// -- START KENAIKAN KELAS PERADILAN UMUM
+
+// -- END KENAIKAN KELAS PERADILAN UMUM
 
     public function apiBelanjaBarang()
     {
@@ -326,7 +631,6 @@ class ApiController extends Controller
         $paguRevisi->when(request('filter_akun'), function ($akun) {
             return $akun->where('kdakun','LIKE',request('filter_akun')."%");
         });
-
 
         return Datatables::eloquent($paguRevisi)
                          ->addColumn('rincian', function ($paguRevisi) {

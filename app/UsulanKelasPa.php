@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class usulan_pa extends Model
+class UsulanKelasPa extends Model
 {
-    protected $table = "usulan_pa";
+    protected $table = "usulan_kelas_pa";
 
     protected $keyType = 'string';
     public $incrementing = false;

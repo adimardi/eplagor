@@ -278,7 +278,7 @@
           </div>
           <div class="text-end pt-1">
             <p class="mb-0 text-capitalize" style="font-size: 30px;">Belanja Pegawai</p>
-            <h4 class="mb-0" style="font-size: 35px;">Rp. 7.486.002.321.000</h4>
+            <h4 class="mb-0" style="font-size: 30px;">Rp. 7.486.002.321.000</h4>
           </div>
         </div>
       </div>
@@ -291,7 +291,7 @@
           </div>
           <div class="text-end pt-1">
             <p class="mb-0 text-capitalize" style="font-size: 30px;">Belanja Barang</p>
-            <h4 class="mb-0" style="font-size: 35px;">Rp. 2.590.492.906.000</h4>
+            <h4 class="mb-0" style="font-size: 30px;">Rp. 2.590.492.906.000</h4>
           </div>
         </div>
       </div>
@@ -304,7 +304,7 @@
           </div>
           <div class="text-end pt-1">
             <p class="mb-0 text-capitalize" style="font-size: 30px;">Belanja Modal</p>
-            <h4 class="mb-0" style="font-size: 35px;">Rp. 1.743.638.173.000</h4>
+            <h4 class="mb-0" style="font-size: 30px;">Rp. 1.743.638.173.000</h4>
           </div>
         </div>
       </div>
@@ -317,7 +317,7 @@
           </div>
           <div class="text-end pt-1">
             <p class="mb-0 text-capitalize" style="font-size: 30px;">Total</p>
-            <h4 class="mb-0" style="font-size: 35px;">Rp. 11.820.133.400.000</h4>
+            <h4 class="mb-0" style="font-size: 30px;">Rp. 11.820.133.400.000</h4>
           </div>
         </div>
       </div>

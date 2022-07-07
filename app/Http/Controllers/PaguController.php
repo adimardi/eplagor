@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\pagu;
+use App\Baseline;
 use App\reffbagian;
 use App\reffsatker;
 use App\temuanbpk_tindaklanjut;
@@ -139,6 +140,51 @@ class PaguController extends Controller
         return view('pagu.indikatif', $data);
     } 
 
+    // Anggaran
+    public function anggaran() 
+    {
+        $this->config = [
+            'title'     => 'Pagu Anggaran',
+            'pageTitle' => 'Pagu Anggaran',
+        ];
+
+        $data = [
+                    'config' => $this->config,
+                ];
+
+        return view('pagu.indikatif', $data);
+    } 
+
+    // Alokasi
+    public function alokasi() 
+    {
+        $this->config = [
+            'title'     => 'Pagu Alokasi',
+            'pageTitle' => 'Pagu Alokasi',
+        ];
+
+        $data = [
+                    'config' => $this->config,
+                ];
+
+        return view('pagu.indikatif', $data);
+    } 
+
+    // Revisi
+    public function revisi() 
+    {
+        $this->config = [
+            'title'     => 'Pagu Revisi',
+            'pageTitle' => 'Pagu Revisi',
+        ];
+
+        $data = [
+                    'config' => $this->config,
+                ];
+
+        return view('pagu.indikatif', $data);
+    } 
+
     // Definitif
     public function definitif() 
     {
@@ -168,6 +214,18 @@ class PaguController extends Controller
 
         return view('pagu.prioritas', $data);
     }  
-  
+
+    public function hapus_prioritas(Request $request) 
+    {
+        //echo $request->idnya;
+        $hapus = Baseline::where('unik', $request->idnya);
+        $hapus->forceDelete();
+
+        $data = [
+            'status' => true,
+            'message' => 'Data Berhasil di hapus'
+        ];
+        return json_encode($data);
+    } 
 
 }

@@ -5,34 +5,34 @@
                   <th class="text-uppercase text-secondary font-weight-bolder">No</th>
                   <th class="text-uppercase text-secondary font-weight-bolder">Kode Satker</th>
                   <th class="text-uppercase text-secondary font-weight-bolder">Nama Satker</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Departement</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Unit</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Program</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Giat</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Output</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Lokasi</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Kab Kota</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Dekon</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Sub Output</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Komponen</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Sub Komponen</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode Akun</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Kode KPPN</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">No Item</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Nama Item</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Vol1</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Sat1</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Vol2</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Sat2</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Vol3</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Sat3</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Vol4</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Sat4</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Volume Kegiatan</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Satuan Kegiatan</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Harga Satuan</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Jumlah</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Aksi</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode Departement</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode Unit</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode Program</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode Giat</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode Output</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode Lokasi</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode Kab Kota</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode Dekon</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode Sub Output</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode Komponen</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode Sub Komponen</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode Akun</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Kode KPPN</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">No Item</th>
+                  <th class="text-start text-uppercase text-secondary font-weight-bolder">Nama Item</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Vol1</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Sat1</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Vol2</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Sat2</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Vol3</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Sat3</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Vol4</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Sat4</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Volume Kegiatan</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Satuan Kegiatan</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Harga Satuan</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Jumlah</th>
+                  <th class="text-center text-uppercase text-secondary font-weight-bolder">Aksi</th>
                 </tr>
               </thead>
             </table>
@@ -76,10 +76,6 @@
                 }
             } );
         } );
-
-        
-
-
   
       var table = $('#tablePagu')
       .DataTable({
@@ -87,7 +83,7 @@
           processing: true,
           serverSide: true,
           ajax: {
-              "url"  : "{{ route ('api.pagu') }}", 
+              "url"  : "{{ route ('api.PopPagu') }}", 
               "data" : function (d) {
                       d.filter_wilayah = $('#filter_wilayah').val();
                       d.filter_eselon = $('#filter_eselon').val();
@@ -120,23 +116,23 @@
                             return meta.row + meta.settings._iDisplayStart + 1;
                             }
                       },
-                      { data: 'reffsatker_id', sClass: "text-secondary mb-0 text-left "},
-                      { data: 'reffsatker.nama_satker_lengkap', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kddept', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdunit', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdprogram', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdgiat', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdoutput', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdlokasi', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdkabkota', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kddekon', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdsoutput', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdkmpnen', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdskmpnen', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdakun', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdkppn', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'noitem', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'nmitem', sClass: "text-secondary mb-0 text-left"},
+                      { data: 'reffsatker_id', sClass: "text-secondary mb-0 text-start"},
+                      { data: 'reffsatker.nama_satker_lengkap', sClass: "text-secondary mb-0 text-start"},
+                      { data: 'kddept', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdunit', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdprogram', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdgiat', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdoutput', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdlokasi', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdkabkota', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kddekon', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdsoutput', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdkmpnen', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdskmpnen', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdakun', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdkppn', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'noitem', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'nmitem', sClass: "text-secondary mb-0 text-start"},
                       { data: 'vol1', sClass: "text-secondary mb-0 text-center"},
                       { data: 'sat1', sClass: "text-secondary mb-0 text-center"},
                       { data: 'vol2', sClass: "text-secondary mb-0 text-center"},
@@ -146,9 +142,9 @@
                       { data: 'vol4', sClass: "text-secondary mb-0 text-center"},
                       { data: 'sat4', sClass: "text-secondary mb-0 text-center"},
                       { data: 'volkeg', sClass: "text-secondary mb-0 text-center"},
-                      { data: 'satkeg', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'hargasat', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'jumlah', sClass: "text-secondary mb-0 text-left"},
+                      { data: 'satkeg', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'hargasat', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.')},
+                      { data: 'jumlah', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.')},
                       { data: 'action', sClass: "text-secondary mb-0 text-center"},
                   ],
           fixedColumns: {

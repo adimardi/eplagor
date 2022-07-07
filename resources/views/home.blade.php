@@ -94,15 +94,16 @@
     
                     <div class="input-group input-group-outline">
                         <select class="form-control" id="thang" name="thang" required="required">
-                        <option value="2021">2021</option>
-                        <option value="2022">2022</option>
+                          @for ($a = 2021; $a <= date('Y'); $a++)
+                            <option value="{{ $a }}">{{ $a }}</option>
+                          @endfor
                         </select>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                        <button type="submit" class="btn bg-gradient-primary w-100 my-4 ms-0 mb-2">Sign in</button>
                         </button>
                         @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">Lupa password?</a>
+                            <a class="btn btn-link mb-0 ms-0" href="{{ route('password.request') }}">Lupa password?</a>
                         @endif
                     </div>
                 </form>

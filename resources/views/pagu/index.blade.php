@@ -77,23 +77,23 @@
                             return meta.row + meta.settings._iDisplayStart + 1;
                             }
                       },
-                      { data: 'reffsatker_id', sClass: "text-secondary mb-0 text-left "},
-                      { data: 'reffsatker.nama_satker_lengkap', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kddept', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdunit', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdprogram', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdgiat', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdoutput', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdlokasi', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdkabkota', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kddekon', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdsoutput', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdkmpnen', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdskmpnen', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdakun', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'kdkppn', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'noitem', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'nmitem', sClass: "text-secondary mb-0 text-left"},
+                      { data: 'reffsatker_id', sClass: "text-secondary mb-0 text-start"},
+                      { data: 'reffsatker.nama_satker_lengkap', sClass: "text-secondary mb-0 text-start"},
+                      { data: 'kddept', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdunit', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdprogram', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdgiat', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdoutput', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdlokasi', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdkabkota', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kddekon', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdsoutput', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdkmpnen', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdskmpnen', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdakun', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'kdkppn', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'noitem', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'nmitem', sClass: "text-secondary mb-0 text-start"},
                       { data: 'vol1', sClass: "text-secondary mb-0 text-center"},
                       { data: 'sat1', sClass: "text-secondary mb-0 text-center"},
                       { data: 'vol2', sClass: "text-secondary mb-0 text-center"},
@@ -103,10 +103,9 @@
                       { data: 'vol4', sClass: "text-secondary mb-0 text-center"},
                       { data: 'sat4', sClass: "text-secondary mb-0 text-center"},
                       { data: 'volkeg', sClass: "text-secondary mb-0 text-center"},
-                      { data: 'satkeg', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'hargasat', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'jumlah', sClass: "text-secondary mb-0 text-left"},
-                      { data: 'action', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'satkeg', sClass: "text-secondary mb-0 text-center"},
+                      { data: 'hargasat', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.')},
+                      { data: 'jumlah', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.')},
                   ],
           fixedColumns: {
                     leftColumns: 3,
@@ -234,7 +233,6 @@
                   <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Satuan Kegiatan</th>
                   <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Harga Satuan</th>
                   <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Jumlah</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Action</th>
                 </tr>
               </thead>
             </table>

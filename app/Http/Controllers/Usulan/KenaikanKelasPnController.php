@@ -31,19 +31,19 @@ class KenaikanKelasPnController extends Controller
     public function index()
     {
         $data['config'] = $this->config;
-        return view('usulan/kenaikankelaspn.index', $data);
+        return view('usulan.kenaikankelaspn.index', $data);
     }
 
     public function create()
     {
     	$data['config'] = $this->config;
-        return view('usulan/kenaikankelaspn.create', $data);
+        return view('usulan.kenaikankelaspn.create', $data);
     }
 
     public function show($id)
     {
       	$data['config'] = $this->config;
-        return view('usulan/kenaikankelaspn.show', $data);  
+        return view('usulan.kenaikankelaspn.show', $data);  
     }
 
     public function store(Request $request)

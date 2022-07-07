@@ -21,8 +21,8 @@
         		<div class="row p-3">
             		<div class="col-12">
 
-            			<button class="btn btn-primary btn-lg ms-2 mt-2" onclick="history.back()">
-							kembali
+            			<button class="btn bg-gradient-danger ms-2 mt-2" onclick="history.back()">
+							<i class="fa fa-arrow-left me-2"></i> Kembali
 						</button>
 
 						<h5 class="ms-2 mb-0">Silahkan lengkapi data berikut!</h5>
@@ -54,7 +54,7 @@
 				                	<tr>
 				                  		<th class="text-uppercase font-weight-bolder" width="200px">Nama Satker <span class="text-primary">*</span></th>
 				                  		<th class="text-uppercase font-weight-bolder p-2">
-											<select class="form-control" name="namaSatker" id="choices-button" placeholder="Nama Satker">
+											<select class="form-control" name="idSatker" id="choices-button" placeholder="Nama Satker">
 												<option value="">- Pilih -</option>
 												@foreach($satker as $data)
 											  	<option value="{{ $data->kode_satker }}">{{ $data->nama_satker_lengkap }}</option>
@@ -74,11 +74,10 @@
 				                  		<th class="text-uppercase font-weight-bolder" width="200px">Pengusulan Ke <span class="text-primary">*</span></th>
 				                  		<th class="text-uppercase font-weight-bolder p-2">
 					                  		<div class="input-group input-group-static mb-0">
-												<input type="text" name="pengusulanKe" class="form-control" placeholder="Pengusulan Ke" onfocus="focused(this)" onfocusout="defocused(this)" required="">
+												<input type="number" name="pengusulanKe" class="form-control" placeholder="Pengusulan Ke" onfocus="focused(this)" onfocusout="defocused(this)" required="">
 											</div>	
 				                  		</th>
 				                	</tr>
-				                	<!--
 				                	<tr>
 				                  		<th class="text-uppercase font-weight-bolder" width="200px">Data Dukung <span class="text-primary">*</span></th>
 				                  		<th class="text-uppercase font-weight-bolder p-2">
@@ -86,9 +85,8 @@
 												<input type="file" name="dakung" class="form-control" placeholder="Data Dukung" onfocus="focused(this)" onfocusout="defocused(this)" required="">
 											</div>	
 				                  		</th>
-				                	</tr>
-				                	-->
-				              	</thead>
+				                	</tr>				              	
+				                </thead>
 				            </table>
 				        </div>
 
@@ -96,12 +94,14 @@
 				            <table class="table table-bordered table-resposive table-sm order-column nowrap align-items-center mb-0">
 				              	<thead>
 				              		<tr class="bg-gradient-primary" style="color: #ffffff;">
-				                		<th class="text-uppercase font-weight-bolder" colspan="5">Unsur Substantif (Jumlah Perkara Putus 3 Tahun terakhir)</th>
+				                		<th class="text-uppercase font-weight-bolder" colspan="8">Unsur Substantif (Jumlah Perkara Putus 3 Tahun terakhir)</th>
 				                	</tr>
 				                	<tr class="bg-success" style="color: #ffffff;">
 				                		<th class="text-uppercase font-weight-bolder" width="200px">Jenis Perkara</th>
 				                  		<th class="text-uppercase font-weight-bolder text-center" width="200px">Tahun 1</th>
+				                  		<th class="text-uppercase font-weight-bolder text-center" width="200px">Jumlah</th>
 				                  		<th class="text-uppercase font-weight-bolder text-center" width="200px">Tahun 2</th>
+				                  		<th class="text-uppercase font-weight-bolder text-center" width="200px">Jumlah</th>
 				                  		<th class="text-uppercase font-weight-bolder text-center" width="200px">Tahun 3</th>
 				                  		<th class="text-uppercase font-weight-bolder text-center" width="200px">Jumlah</th>
 				                	</tr>
@@ -111,22 +111,32 @@
 				                  		</th>
 				                  		<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="cgTahun1" class="form-control text-center" placeholder="Jumlah Perkara 1" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="cgTahun1" class="form-control text-center" placeholder="Tahun 1" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>	
 										</th>
 				                  		<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="cgTahun2" class="form-control text-center" placeholder="Jumlah Perkara 2" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="cgJumlahTahun1" class="form-control text-center" placeholder="Jumlah Perkara Tahun 1" onfocus="focused(this)" onfocusout="defocused(this)">
+											</div>	
+										</th>
+				                  		<th class="text-uppercase font-weight-bolder text-center" width="100px">
+				                  			<div class="input-group input-group-static mb-0">
+												<input type="text" name="cgTahun2" class="form-control text-center" placeholder="Tahun 2" onfocus="focused(this)" onfocusout="defocused(this)">
+											</div>	
+										</th>
+				                  		<th class="text-uppercase font-weight-bolder text-center" width="100px">
+				                  			<div class="input-group input-group-static mb-0">
+												<input type="text" name="cgJumlahTahun2" class="form-control text-center" placeholder="Jumlah Perkara Tahun 2" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>	
 										</th>
 										<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="cgTahun3" class="form-control text-center" placeholder="Jumlah Perkara 3" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="cgTahun3" class="form-control text-center" placeholder="Tahun 3" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>	
 										</th>
 										<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="cgJumlah" class="form-control text-center" placeholder="Jumlah Perkara CG" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="cgJumlahTahun3" class="form-control text-center" placeholder="Jumlah Perkara Tahun 3" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>	
 										</th>
 				                	</tr>
@@ -136,22 +146,32 @@
 					                  	</th>
 				                  		<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="ctTahun1" class="form-control text-center" placeholder="Jumlah Perkara 1" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="ctTahun1" class="form-control text-center" placeholder="Tahun 1" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>	
 										</th>
 				                  		<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="ctTahun2" class="form-control text-center" placeholder="Jumlah Perkara 2" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="ctJumlahTahun1" class="form-control text-center" placeholder="Jumlah Perkara Tahun 1" onfocus="focused(this)" onfocusout="defocused(this)">
+											</div>	
+										</th>
+				                  		<th class="text-uppercase font-weight-bolder text-center" width="100px">
+				                  			<div class="input-group input-group-static mb-0">
+												<input type="text" name="ctTahun2" class="form-control text-center" placeholder="Tahun 2" onfocus="focused(this)" onfocusout="defocused(this)">
+											</div>	
+										</th>
+				                  		<th class="text-uppercase font-weight-bolder text-center" width="100px">
+				                  			<div class="input-group input-group-static mb-0">
+												<input type="text" name="ctJumlahTahun2" class="form-control text-center" placeholder="Jumlah Perkara Tahun 2" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>	
 										</th>
 										<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="ctTahun3" class="form-control text-center" placeholder="Jumlah Perkara 3" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="ctTahun3" class="form-control text-center" placeholder="Tahun 3" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>	
 										</th>
 										<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="ctJumlah" class="form-control text-center" placeholder="Jumlah Perkara CT" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="ctJumlahTahun3" class="form-control text-center" placeholder="Jumlah Perkara Tahun 3" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>	
 										</th>
 				                	</tr>
@@ -161,22 +181,32 @@
 				                  		</th>
 				                  		<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="plTahun1" class="form-control text-center" placeholder="Jumlah Perkara 1" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="pTahun1" class="form-control text-center" placeholder="Tahun 1" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>	
 										</th>
 				                  		<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="plTahun2" class="form-control text-center" placeholder="Jumlah Perkara 2" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="pJumlahTahun1" class="form-control text-center" placeholder="Jumlah Perkara Tahun 1" onfocus="focused(this)" onfocusout="defocused(this)">
+											</div>	
+										</th>
+				                  		<th class="text-uppercase font-weight-bolder text-center" width="100px">
+				                  			<div class="input-group input-group-static mb-0">
+												<input type="text" name="pTahun2" class="form-control text-center" placeholder="Tahun 2" onfocus="focused(this)" onfocusout="defocused(this)">
+											</div>	
+										</th>
+				                  		<th class="text-uppercase font-weight-bolder text-center" width="100px">
+				                  			<div class="input-group input-group-static mb-0">
+												<input type="text" name="pJumlahTahun2" class="form-control text-center" placeholder="Jumlah Perkara Tahun 2" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>	
 										</th>
 										<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="plTahun3" class="form-control text-center" placeholder="Jumlah Perkara 3" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="pTahun3" class="form-control text-center" placeholder="Tahun 3" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>	
 										</th>
 										<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="plJumlah" class="form-control text-center" placeholder="Jumlah Perkara PL" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="pJumlahTahun3" class="form-control text-center" placeholder="Jumlah Perkara Tahun 3" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>	
 										</th>
 				                	</tr>
@@ -208,7 +238,7 @@
 				                  		</th>
 				                		<th class="text-uppercase font-weight-bolder text-center" width="100px">
 				                  			<div class="input-group input-group-static mb-0">
-												<input type="text" name="akses" class="form-control text-center" placeholder="Komunikasi & Transportasi" onfocus="focused(this)" onfocusout="defocused(this)">
+												<input type="text" name="kemudahanAkses" class="form-control text-center" placeholder="Komunikasi & Transportasi" onfocus="focused(this)" onfocusout="defocused(this)">
 											</div>
 				                  		</th>
 				                	</tr>

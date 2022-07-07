@@ -13,11 +13,11 @@
   $('#tablePagu thead tr').clone(true).appendTo( '#tablePagu thead' );
         $('#tablePagu thead tr:eq(1) th').each( function (i) {
             var title = $(this).text();
-            if(title == 'No' || title == 'Status')
+            if(title == 'No' || title == 'Action')
             {
               $(this).html( '###' );
             }
-            else if(title == 'Action')
+            else if(title == 'ActionXX')
             {
               $(this).html( '<a href="javascript:void(0)" onclick="deleteData()" type="button" class=""><span><i class="fas fa-search fa-3x"></i></span></a><a href="javascript:void(0)" onclick="deleteData()" type="button" class=""><span><i class="fas fa-times-circle fa-3x"></i></span></a>' )
             }
@@ -33,10 +33,6 @@
                 }
             } );
         } );
-
-        
-
-
   
       var table = $('#tablePagu')
       .DataTable({
@@ -137,8 +133,6 @@
 
   });
 
-
-
 </script>
 <script>
     function deleteData(ID) {
@@ -154,7 +148,7 @@
     }).then((result) => {
         if (result.isConfirmed) {
           $.ajax({
-              url: "{{ route('baseline.hapus') }}",
+              url: "{{ route('pagu.hapus_prioritas') }}",
               type: 'POST',
               data: {
                 _token: "{{ csrf_token() }}",

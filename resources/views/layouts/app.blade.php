@@ -26,9 +26,10 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/DataTables/FixedColumns-4.0.1/css/fixedColumns.dataTables.css')}}"/>
     {{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/yadcf-0.9.3/jquery.dataTables.yadcf.css')}}"/> --}}
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"/>
 
-    <link rel="stylesheet" href="{{asset('assets/css/choices.min.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/choices.min.css')}}"/>
     @section('js')    
     
     @show

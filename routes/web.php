@@ -45,11 +45,12 @@ Route::group(['middleware'=>['auth','verified']], function (){
     Route::get('indikatif', 'PaguController@indikatif')->name('pagu.indikatif');
     Route::get('definitif', 'PaguController@definitif')->name('pagu.definitif');
     Route::get('prioritas', 'PaguController@prioritas')->name('pagu.prioritas');
+    Route::post('hapus_prioritas', 'PaguController@hapus_prioritas')->name('pagu.hapus_prioritas');
+    Route::get('hapus', 'PaguController@hapus')->name('pagu.hapus');
 
-    // Baseline
-    Route::resource('baseline', 'BaselineController');
-    Route::post('getpagu', 'BaselineController@getpagu')->name('baseline.getpagu');
-    Route::post('hapusBaseline', 'BaselineController@hapus')->name('baseline.hapus');
+    Route::get('anggaran', 'PaguController@anggaran')->name('pagu.anggaran');
+    Route::get('lokasi', 'PaguController@alokasi')->name('pagu.alokasi');
+    Route::get('revisi', 'PaguController@revisi')->name('pagu.revisi');
 
     // Usulan
     Route::group(['as' => 'usulan.', 'prefix' => 'usulan', 'namespace' => 'Usulan'], function () {
@@ -68,6 +69,18 @@ Route::group(['middleware'=>['auth','verified']], function (){
 
     });
 
+    // Baseline 1
+    Route::resource('baseline1', 'Baseline1Controller');
+    Route::get('baseline1/dakung/{param?}', 'Baseline1Controller@dakung')->name('baseline1.dakung');
+    Route::post('baseline1/pagu', 'Baseline1Controller@pagu')->name('baseline1.pagu');
+    Route::post('baseline1/uploads', 'Baseline1Controller@uploads')->name('baseline1.uploads');
+
+    // Baseline 3
+    Route::resource('baseline3', 'Baseline3Controller');
+    Route::get('baseline3/rincian/{id?}', 'Baseline3Controller@rincian')->name('baseline3.rincian');
+    Route::get('baseline3/dakung/{id?}', 'Baseline3Controller@dakung')->name('baseline3.dakung');
+    Route::post('baseline3/uploads', 'Baseline3Controller@uploads')->name('baseline3.uploads');
+    Route::post('baseline3/pagu', 'Baseline3Controller@pagu')->name('baseline3.pagu');
 });
 
 
@@ -81,9 +94,19 @@ Route::group(['as'=>'api.','prefix'=>'api','middleware'=>['auth','verified']], f
     Route::get('user', 'ApiController@apiUser')->name('user');
     Route::get('satker', 'ApiController@apiSatker')->name('satker');
     Route::get('pagu', 'ApiController@apiPagu')->name('pagu');
-    Route::get('baseline', 'ApiController@apiBaseline')->name('baseline');
     Route::get('prioritas', 'ApiController@apiPrioritas')->name('prioritas');
 
     // usulan kenaikan kelas PA
     Route::get('usulankenaikankelaspa', 'ApiController@apiUsulanKenaikanKelasPa')->name('usulankenaikankelaspa');
+ 
+    // Baseline 1
+    Route::get('baseline1', 'ApiController@apiBaseline1')->name('baseline1');
+    Route::get('pagubaseline1', 'ApiController@apiPaguBaseline1')->name('pagubaseline1');
+    Route::get('dakungbaseline1', 'ApiController@apiDakungBaseline1')->name('dakungbaseline1');
+
+    // Baseline 3
+    Route::get('baseline3', 'ApiController@apiBaseline3')->name('baseline3');
+    Route::get('pagubaseline3', 'ApiController@apiPaguBaseline3')->name('pagubaseline3');
+    Route::get('databaseline3', 'ApiController@apiDataBaseline3')->name('databaseline3');
+    Route::get('dakungbaseline3', 'ApiController@apiDakungBaseline3')->name('dakungbaseline3');
 });
