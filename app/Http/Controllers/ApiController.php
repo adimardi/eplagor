@@ -207,7 +207,7 @@ class ApiController extends Controller
     // -- START BASELINE 1
     public function apiBaseline1()
     {
-        $base = baseline::where('thang', Session::get('thang'));
+        $base = Baseline::where('thang', Session::get('thang'));
 
         $base = $base->with(['reffsatker']);
         $this->filterUser($base);
