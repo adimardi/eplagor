@@ -299,7 +299,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12 text-end">
-                    <a href="{{ route('baseline.index') }}" class="btn btn-outline-danger mt-2">
+                    <a href="{{ route('baseline1.index') }}" class="btn btn-outline-danger mt-2">
                       <i class="fa fa-close me-3 fa-2x"></i>Batal
                     </a>
                     <button type="submit" class="btn btn-outline-info mt-2">
