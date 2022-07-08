@@ -70,17 +70,17 @@ Route::group(['middleware'=>['auth','verified']], function (){
     });
 
     // Baseline 1
-    Route::resource('baseline1', 'Baseline1Controller');
     Route::get('baseline1/dakung/{param?}', 'Baseline1Controller@dakung')->name('baseline1.dakung');
     Route::post('baseline1/pagu', 'Baseline1Controller@pagu')->name('baseline1.pagu');
     Route::post('baseline1/uploads', 'Baseline1Controller@uploads')->name('baseline1.uploads');
+    Route::resource('baseline1', 'Baseline1Controller');
 
     // Baseline 3
-    Route::resource('baseline3', 'Baseline3Controller');
     Route::get('baseline3/rincian/{id?}', 'Baseline3Controller@rincian')->name('baseline3.rincian');
     Route::get('baseline3/dakung/{id?}', 'Baseline3Controller@dakung')->name('baseline3.dakung');
     Route::post('baseline3/uploads', 'Baseline3Controller@uploads')->name('baseline3.uploads');
     Route::post('baseline3/pagu', 'Baseline3Controller@pagu')->name('baseline3.pagu');
+    Route::resource('baseline3', 'Baseline3Controller');
 });
 
 
