@@ -36,7 +36,7 @@ class Baseline3Controller extends Controller
     public function index()
     {
         $data['config'] = $this->config;
-        return view('baseline3\index', $data);
+        return view('baseline3.index', $data);
     }
 
     public function rincian($id)
@@ -51,7 +51,7 @@ class Baseline3Controller extends Controller
                     'unik' => Crypt::decrypt($id)
                 ];
 
-        return view('baseline3\rincian', $data);
+        return view('baseline3.rincian', $data);
     }
 
     public function dakung($id)
@@ -66,7 +66,7 @@ class Baseline3Controller extends Controller
                     'unik' => Crypt::decrypt($id)
                 ];
 
-        return view('baseline3\dakung', $data);
+        return view('baseline3.dakung', $data);
     }
 
     public function pagu(Request $request)
@@ -82,7 +82,7 @@ class Baseline3Controller extends Controller
         $data['kdkegiatan'] = UraianAnggaran::select('kode')->where('jenis', 'kegiatan')->orderBy('id', 'ASC')->get();
         $data['kdoutput'] = UraianAnggaran::select('kode')->where('jenis', 'output')->orderBy('id', 'ASC')->get();
         $data['kdsuboutput'] = UraianAnggaran::select('kode')->where('jenis', 'suboutput')->orderBy('id', 'ASC')->get();
-        return view('baseline3\create', $data); 
+        return view('baseline3.create', $data); 
     }
 
     public function store(Request $request)

@@ -36,7 +36,7 @@ class Baseline1Controller extends Controller
     public function index()
     {
         $data['config'] = $this->config;
-        return view('baseline1\index', $data);
+        return view('baseline1.index', $data);
     }
 
     public function dakung($param)
@@ -50,7 +50,7 @@ class Baseline1Controller extends Controller
                     'config' => $this->config,
                 ];
 
-        return view('baseline1\dakung', $data);
+        return view('baseline1.dakung', $data);
     }
 
     public function pagu(Request $request)
@@ -66,7 +66,7 @@ class Baseline1Controller extends Controller
         $data['kdkegiatan'] = UraianAnggaran::select('kode')->where('jenis', 'kegiatan')->orderBy('id', 'ASC')->get();
         $data['kdoutput'] = UraianAnggaran::select('kode')->where('jenis', 'output')->orderBy('id', 'ASC')->get();
         $data['kdsuboutput'] = UraianAnggaran::select('kode')->where('jenis', 'suboutput')->orderBy('id', 'ASC')->get();
-        return view('baseline1\create', $data); 
+        return view('baseline1.create', $data); 
     }
 
     public function store(Request $request)
