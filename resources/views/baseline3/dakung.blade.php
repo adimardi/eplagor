@@ -88,8 +88,8 @@
                       	{ data: 'file', sClass: "text-secondary mb-0 text-center", width: "50px"},
                   	],
           	fixedColumns: {
-                leftColumns: 3,
-                rightColumns: 1
+                leftColumns: 0,
+                rightColumns: 0
             }
       	});
 

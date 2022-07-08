@@ -109,8 +109,8 @@
                       { data: 'action', sClass: "text-secondary mb-0 text-center"},
                   ],
           fixedColumns: {
-                    leftColumns: 3,
-                    rightColumns: 1
+                    leftColumns: 0,
+                    rightColumns: 0
                 }
       } );
 

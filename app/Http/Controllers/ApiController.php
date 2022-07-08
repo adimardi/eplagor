@@ -542,13 +542,15 @@ class ApiController extends Controller
                 return(round($rata));
             })
             
-            ->addColumn('action', function($pa){
-                $btn =  '  <a href="'.route('usulan.kenaikankelaspa.show', Crypt::encrypt($pa->id)).'" class="btn btn-sm btn-info ms-0 mb-0" title="Detail">
+            ->addColumn('aksi', function($pa){
+                $btn =  '   <a href="'.route('usulan.kenaikankelaspa.show', Crypt::encrypt($pa->id)).'" class="btn btn-sm btn-info ms-0 mb-0" title="Detail">
                                 <i class="fa fa-eye" style="font-size: 12px; line-height: 12px;"></i>
                             </a>
+                            <!--
                             <button type="button" rel="tooltip" class="btn btn-sm btn-danger ms-0 mb-0" data-original-title="Hapus" title="Hapus" onclick="deleteData(\''.$pa->id.'\')">
                                 <i class="fa fa-trash" style="font-size: 12px; line-height: 12px;"></i>
                             </button>
+                            -->
                         '; 
 
                 return $btn;

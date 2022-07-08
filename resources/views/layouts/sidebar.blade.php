@@ -13,30 +13,11 @@
       <li class="nav-item">
         <a class="nav-link text-white {{ request()->is('home') ? ' active bg-gradient-primary' : '' }}" href="{{route('home')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">dashboard</i>
+            <span class="material-icons">dvr</span>
           </div>
           <span class="nav-link-text ms-1">Dashboard</span>
         </a>
       </li>
-
-      <!--
-      <li class="nav-item">
-        <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link text-white active collapsed" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
-        <i class="material-icons-round opacity-10">dashboard</i>
-        <span class="nav-link-text ms-2 ps-1">PAGU ANGGARAN</span>
-        </a>
-        <div class="collapse" id="dashboardsExamples" style="">
-          <ul class="nav ">
-            <li class="nav-item ">
-              <a class="nav-link text-white " href="../../pages/dashboards/analytics.html">
-              <span class="sidenav-mini-icon"> A </span>
-              <span class="sidenav-normal  ms-2  ps-1"> DIPA AWAL </span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      -->
 
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pagu</h6>
@@ -53,26 +34,26 @@
 
       <li class="nav-item">
         <a data-bs-toggle="collapse" href="#baseline" class="nav-link text-white {{ request()->routeIs('baseline1.*') ? 'active' : '' }}" data-bs-toggle="collapse" aria-controls="baseline" role="button" aria-expanded="{{ request()->routeIs('baseline1.*') ? 'true' : 'false' }}">
-        <i class="material-icons">dashboard</i>
+        <span class="material-icons">add_task</span>
         <span class="nav-link-text ms-2 ps-1">Baseline</span>
         </a>
         <div class="collapse {{ request()->routeIs('baseline1.*') ? 'show' : '' }}" id="baseline">
           <ul class="nav ">
             <li class="nav-item ">
               <a class="nav-link text-white {{ request()->routeIs('baseline1.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('baseline1.index')}}">
-                <span class="sidenav-mini-icon"><i class="material-icons text-white text-lg">inventory_2</i></span>
+                <span class="material-icons">view_list</span>
                 <span class="sidenav-normal  ms-2  ps-1"> Data Baseline </span>
               </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link text-white {{ request()->routeIs('baseline1.dakung.', 'all') ? ' active bg-gradient-primary' : '' }}" href="{{route('baseline1.dakung', 'all')}}">
-                <span class="sidenav-mini-icon"><i class="material-icons text-white text-lg">inventory_2</i></span>
+                <span class="material-icons">folder_special</span>
                 <span class="sidenav-normal  ms-2  ps-1"> Data Dukung Baseline </span>
               </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link text-white {{ request()->routeIs('baseline3.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('baseline3.index')}}">
-              <span class="sidenav-mini-icon"><i class="material-icons text-white text-lg">inventory_2</i></span>
+              <span class="material-icons">stacked_bar_chart</span>
               <span class="sidenav-normal  ms-2  ps-1"> Rekap Baseline </span>
               </a>
             </li>
@@ -83,7 +64,7 @@
       <li class="nav-item">
         <a class="nav-link text-white {{ request()->routeIs('pagu.prioritas') ? ' active bg-gradient-primary' : '' }}" href="{{route('pagu.prioritas')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">dashboard</i>
+            <span class="material-icons">grade</span>
           </div>
           <span class="nav-link-text ms-1">Skala Prioritas</span>
         </a>
@@ -92,20 +73,20 @@
       <!-- Menu Pagu Indikatif -->
       <li class="nav-item">
         <a data-bs-toggle="collapse" href="#indikatif" class="nav-link text-white {{ request()->routeIs('pagu.indikatif') ? 'active' : '' }}" data-bs-toggle="collapse" aria-controls="indikatif" role="button" aria-expanded="{{ request()->routeIs('pagu.indikatif') ? 'true' : 'false' }}">
-        <i class="material-icons">dashboard</i>
+        <i class="ni ni-money-coins text-lg"></i>
         <span class="nav-link-text ms-2 ps-1">Pagu Indikatif</span>
         </a>
         <div class="collapse {{ request()->routeIs('pagu.indikatif') ? 'show' : '' }}" id="indikatif">
           <ul class="nav ">
             <li class="nav-item ">
               <a class="nav-link text-white {{ request()->routeIs('pagu.indikatif') ? ' active bg-gradient-primary' : '' }}" href="{{route('pagu.indikatif')}}">
-                <span class="sidenav-mini-icon"><i class="material-icons text-white text-lg">inventory_2</i></span>
+                <span class="material-icons">view_list</span>
                 <span class="sidenav-normal  ms-2  ps-1"> Data Pagu Indikatif </span>
               </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link text-white {{ request()->routeIs('baseline1.dakung.', 'all') ? ' active bg-gradient-primary' : '' }}" href="{{route('baseline1.dakung', 'all')}}">
-                <span class="sidenav-mini-icon"><i class="material-icons text-white text-lg">inventory_2</i></span>
+                <span class="material-icons">folder_special</span>
                 <span class="sidenav-normal  ms-2  ps-1"> Data Dukung Pagu Indikatif </span>
               </a>
             </li>
@@ -116,20 +97,20 @@
       <!-- Menu Pagu Anggaran -->
       <li class="nav-item">
         <a data-bs-toggle="collapse" href="#anggaran" class="nav-link text-white {{ request()->routeIs('pagu.anggaran') ? 'active' : '' }}" data-bs-toggle="collapse" aria-controls="anggaran" role="button" aria-expanded="{{ request()->routeIs('pagu.anggaran') ? 'true' : 'false' }}">
-        <i class="material-icons">dashboard</i>
+        <i class="ni ni-money-coins text-lg"></i>
         <span class="nav-link-text ms-2 ps-1">Pagu Anggaran</span>
         </a>
         <div class="collapse {{ request()->routeIs('pagu.anggaran') ? 'show' : '' }}" id="anggaran">
           <ul class="nav ">
             <li class="nav-item ">
               <a class="nav-link text-white {{ request()->routeIs('pagu.anggaran') ? ' active bg-gradient-primary' : '' }}" href="{{route('pagu.anggaran')}}">
-                <span class="sidenav-mini-icon"><i class="material-icons text-white text-lg">inventory_2</i></span>
+                <span class="material-icons">view_list</span>
                 <span class="sidenav-normal  ms-2  ps-1"> Data Pagu Anggaran </span>
               </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link text-white {{ request()->routeIs('baseline1.dakung.', 'all') ? ' active bg-gradient-primary' : '' }}" href="{{route('baseline1.dakung', 'all')}}">
-                <span class="sidenav-mini-icon"><i class="material-icons text-white text-lg">inventory_2</i></span>
+                <span class="material-icons">folder_special</span>
                 <span class="sidenav-normal  ms-2  ps-1"> Data Dukung Pagu Anggaran </span>
               </a>
             </li>
@@ -140,20 +121,20 @@
       <!-- Menu Pagu Alokasi -->
       <li class="nav-item">
         <a data-bs-toggle="collapse" href="#alokasi" class="nav-link text-white {{ request()->routeIs('pagu.alokasi') ? 'active' : '' }}" data-bs-toggle="collapse" aria-controls="alokasi" role="button" aria-expanded="{{ request()->routeIs('pagu.alokasi') ? 'true' : 'false' }}">
-        <i class="material-icons">dashboard</i>
+        <i class="ni ni-money-coins text-lg"></i>
         <span class="nav-link-text ms-2 ps-1">Pagu Alokasi</span>
         </a>
         <div class="collapse {{ request()->routeIs('pagu.alokasi') ? 'show' : '' }}" id="alokasi">
           <ul class="nav ">
             <li class="nav-item ">
               <a class="nav-link text-white {{ request()->routeIs('pagu.alokasi') ? ' active bg-gradient-primary' : '' }}" href="{{route('pagu.alokasi')}}">
-                <span class="sidenav-mini-icon"><i class="material-icons text-white text-lg">inventory_2</i></span>
+                <span class="material-icons">view_list</span>
                 <span class="sidenav-normal  ms-2  ps-1"> Data Pagu Alokasi </span>
               </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link text-white {{ request()->routeIs('baseline1.dakung.', 'all') ? ' active bg-gradient-primary' : '' }}" href="{{route('baseline1.dakung', 'all')}}">
-                <span class="sidenav-mini-icon"><i class="material-icons text-white text-lg">inventory_2</i></span>
+                <span class="material-icons">folder_special</span>
                 <span class="sidenav-normal  ms-2  ps-1"> Data Dukung Pagu Alokasi </span>
               </a>
             </li>
@@ -164,20 +145,20 @@
       <!-- Menu Pagu Revisi -->
       <li class="nav-item">
         <a data-bs-toggle="collapse" href="#revisi" class="nav-link text-white {{ request()->routeIs('pagu.revisi') ? 'active' : '' }}" data-bs-toggle="collapse" aria-controls="revisi" role="button" aria-expanded="{{ request()->routeIs('pagu.revisi') ? 'true' : 'false' }}">
-        <i class="material-icons">dashboard</i>
+        <i class="ni ni-money-coins text-lg"></i>
         <span class="nav-link-text ms-2 ps-1">Pagu Revisi</span>
         </a>
         <div class="collapse {{ request()->routeIs('pagu.revisi') ? 'show' : '' }}" id="revisi">
           <ul class="nav ">
             <li class="nav-item ">
               <a class="nav-link text-white {{ request()->routeIs('pagu.revisi') ? ' active bg-gradient-primary' : '' }}" href="{{route('pagu.revisi')}}">
-                <span class="sidenav-mini-icon"><i class="material-icons text-white text-lg">inventory_2</i></span>
+                <span class="material-icons">view_list</span>
                 <span class="sidenav-normal  ms-2  ps-1"> Data Pagu Revisi </span>
               </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link text-white {{ request()->routeIs('baseline1.dakung.', 'all') ? ' active bg-gradient-primary' : '' }}" href="{{route('baseline1.dakung', 'all')}}">
-                <span class="sidenav-mini-icon"><i class="material-icons text-white text-lg">inventory_2</i></span>
+                <span class="material-icons">view_list</span>
                 <span class="sidenav-normal  ms-2  ps-1"> Data Usulan Revisi </span>
               </a>
             </li>
@@ -188,7 +169,7 @@
       <li class="nav-item">
         <a class="nav-link text-white {{ request()->routeIs('baseline1.dakung.', 'all') ? ' active bg-gradient-primary' : '' }}" href="{{route('baseline1.dakung', 'all')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons text-white text-lg">inventory_2</i>
+            <span class="material-icons">post_add</span>
           </div>
           <span class="nav-link-text ms-1">Usulan ABT</span>
         </a>
@@ -201,7 +182,7 @@
       <li class="nav-item">
         <a class="nav-link text-white {{ request()->routeIs('usulan.kenaikankelaspa.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('usulan.kenaikankelaspa.index')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">dashboard</i>
+            <span class="material-icons">trending_up</span>
           </div>
           <span class="nav-link-text ms-1">Peradilan Agama</span>
         </a>
@@ -210,7 +191,7 @@
       <li class="nav-item">
         <a class="nav-link text-white {{ request()->routeIs('usulan.kenaikankelaspn.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('usulan.kenaikankelaspn.index')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">dashboard</i>
+            <span class="material-icons">trending_up</span>
           </div>
           <span class="nav-link-text ms-1">Peradilan Umum</span>
         </a>
@@ -224,7 +205,7 @@
       <li class="nav-item">
         <a class="nav-link text-white {{ request()->routeIs('user.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('user.index')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">person</i>
+            <span class="material-icons">people</span>
           </div>
           <span class="nav-link-text ms-1">Data User</span>
         </a>

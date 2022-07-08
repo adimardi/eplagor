@@ -80,8 +80,8 @@
                       	{ data: 'aksi', sClass: "text-secondary mb-0 text-center", width: "10px"},
                   	],
           	fixedColumns: {
-                    leftColumns: 4,
-                    rightColumns: 1
+                    leftColumns: 0,
+                    rightColumns: 0
                 }
       	});
 
