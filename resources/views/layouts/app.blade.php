@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset('assets/css/material-dashboard.css?v=3.0.0')}}" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.dataTables.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/DataTables/datatables.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/DataTables/FixedColumns-4.0.1/css/fixedColumns.dataTables.css')}}"/>
     {{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/yadcf-0.9.3/jquery.dataTables.yadcf.css')}}"/> --}}

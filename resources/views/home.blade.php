@@ -94,7 +94,7 @@
     
                     <div class="input-group input-group-outline">
                         <select class="form-control" id="thang" name="thang" required="required">
-                          @for ($a = 2021; $a <= date('Y'); $a++)
+                          @for ($a = date('Y'); $a >= date('Y')-2; $a-=1)
                             <option value="{{ $a }}">{{ $a }}</option>
                           @endfor
                         </select>

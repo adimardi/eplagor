@@ -33,7 +33,7 @@ class DataDukungBaselineController extends Controller
     public function index()
     {
         $data['config'] = $this->config;
-        return view('pagu\baseline\datadukung\index', $data);
+        return view('pagu.baseline.datadukung.index', $data);
     }
 
     public function show($id)
@@ -42,7 +42,7 @@ class DataDukungBaselineController extends Controller
         $pagu = baseline::find(Crypt::decrypt($id));
         $data['pagu'] = baseline::find(Crypt::decrypt($id));
         $data['satker'] = reffsatker::find($pagu->reffsatker_id);
-        return view('pagu\baseline\datadukung\show', $data);
+        return view('pagu\baseline.datadukung.show', $data);
     }
 
     public function create()

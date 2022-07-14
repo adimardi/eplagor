@@ -176,11 +176,8 @@
 
 
 @stop
-
 @section('css')
 @stop
-
-
 
 @extends('layouts.app')
 
