@@ -10,30 +10,6 @@
   $(document).ready(function() {
   $.fn.dataTable.ext.errMode = 'throw';
 
-  $('#tablePagu thead tr').clone(true).appendTo( '#tablePagu thead' );
-        $('#tablePagu thead tr:eq(1) th').each( function (i) {
-            var title = $(this).text();
-            if(title == 'No' || title == 'Status')
-            {
-              $(this).html( '###' );
-            }
-            else if(title == 'Action')
-            {
-              $(this).html( '<a href="javascript:void(0)" onclick="deleteData()" type="button" class=""><span><i class="fas fa-search fa-3x"></i></span></a><a href="javascript:void(0)" onclick="deleteData()" type="button" class=""><span><i class="fas fa-times-circle fa-3x"></i></span></a>' )
-            }
-            else{
-            $(this).html( '<input type="text" style="width:100%;" value="" placeholder="Cari '+title+'" />' );
-            }
-            $( 'input', this ).on( 'keyup change', function () {
-                if ( table.column(i).search() !== this.value ) {
-                    table
-                        .column(i)
-                        .search( this.value )
-                        .draw();
-                }
-            } );
-        } );
-
   
       var table = $('#tablePagu')
       .DataTable({
@@ -80,6 +56,7 @@
                       { data: 'total_belanja_pegawai', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
                       { data: 'total_belanja_barang', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
                       { data: 'total_belanja_modal', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
+                      { data: 'jumlah', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
                       { data: 'file', sClass: "text-secondary mb-0 text-center", width: "50px"},
                   ],
           fixedColumns: {
@@ -108,12 +85,9 @@
           table.draw();
       });
 
-
-  });
-
-
-
+});
 </script>
+
 <script>
     function deleteData(ID) {
     
@@ -168,25 +142,30 @@
       <div class="card my-4">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
           <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-            <h6 class="text-white text-capitalize ps-3">Table {{ $config['pageTitle']  }}</h6>
+            <h6 class="text-white text-capitalize ps-3">Daftar {{ $config['pageTitle']  }}</h6>
           </div>
         </div>
-        <div class="card-body px-0 pb-2">
-          <div class="table-responsive p-3">
-            <table id="tablePagu" class="table table-resposive table-sm order-column nowrap align-items-center mb-0" width="100%">
-              <thead>
-                <tr>
-                  <th class="text-uppercase text-secondary font-weight-bolder">No</th>
-                  <th class="text-uppercase text-secondary font-weight-bolder">Kode Satker</th>
-                  <th class="text-uppercase text-secondary font-weight-bolder">Nama Satker</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Tahun</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Belanja Pegawai</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Belanja Barang</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Belanja Modal</th>
-                  <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Data Dukung</th>
-                </tr>
-              </thead>
-            </table>
+        <div class="card-body px-0 py-0 pb-0">
+          <div class="row p-3">
+            <div class="col-12">
+              <div class="table-responsive p-3">
+                <table id="tablePagu" class="table table-bordered table-resposive table-sm order-column nowrap align-items-center mb-0" width="100%">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary font-weight-bolder">No</th>
+                      <th class="text-uppercase text-secondary font-weight-bolder">Kode Satker</th>
+                      <th class="text-uppercase text-secondary font-weight-bolder">Nama Satker</th>
+                      <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Tahun</th>
+                      <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Belanja Pegawai</th>
+                      <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Belanja Barang</th>
+                      <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Belanja Modal</th>
+                      <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Total Pagu</th>
+                      <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Data Dukung</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>

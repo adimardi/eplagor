@@ -3,24 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\BaselineDakung;
+use App\pagu;
+use App\Anggaran;
+use App\AnggaranDakung;
 use App\reffbagian;
 use App\reffsatker;
+use App\temuanbpk_tindaklanjut;
 use Carbon\Carbon;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Crypt;
+
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Cache;
 
 
-class DataDukungBaselineController extends Controller
+class PaguIndikatifController extends Controller
 {
     protected $session;
-    private $title = 'Data Dukung Baseline';
+    private $title = 'Pagu Anggaran';
 
     public function __construct()
     {
@@ -33,16 +37,8 @@ class DataDukungBaselineController extends Controller
     public function index()
     {
         $data['config'] = $this->config;
-        return view('pagu.baseline.datadukung.index', $data);
-    }
 
-    public function show($id)
-    {
-        $data['config'] = $this->config;
-        $pagu = baseline::find(Crypt::decrypt($id));
-        $data['pagu'] = baseline::find(Crypt::decrypt($id));
-        $data['satker'] = reffsatker::find($pagu->reffsatker_id);
-        return view('pagu\baseline.datadukung.show', $data);
+        return view('pagu.indikatif.index', $data);
     }
 
     public function create()
@@ -50,22 +46,55 @@ class DataDukungBaselineController extends Controller
 
     }
 
-    public function upload(Request $request)
-    {
-        //echo $request->id;  
-        return redirect('datadukungbaseline')->with('msg', 'Dokumen '.$request->id.' berhasil di upload.');  
-    }
-
     public function store(Request $request)
     {
-        BaselineDakung::updateOrCreate(
+
+    }
+
+    public function show($id)
+    {
+        $data = [
+                    'config' => $this->config,
+                    'unik' => Crypt::decrypt($id)
+                ];
+
+        return view('pagu.indikatif.show', $data);   
+    }
+
+    public function dakung($id)
+    {
+        $data = [
+                    'config' => $this->config,
+                    'unik' => Crypt::decrypt($id)
+                ];
+
+        return view('pagu.indikatif.dakung', $data);   
+    }
+
+    public function edit($id)
+    {
+
+    }
+
+    public function update(Request $request, $id)
+    {
+
+    }
+
+    public function destroy($id)
+    {
+
+    }
+
+    public function uploads(Request $request)
+    {
+        AnggaranDakung::updateOrCreate(
             [
                 'id' => $request->id,
-                'thang' => Session::get('thang'),
+                'thang' => 2023,
             ],
             [
                 'reffsatker_id' => $request->kodeSatker,
-                'kdunit' => $request->kodeUnit,
                 'kdprogram' => $request->kodeProgram,
                 'kdgiat' => $request->kodeKegiatan,
                 'kdoutput' => $request->kodeOutput,
@@ -78,7 +107,7 @@ class DataDukungBaselineController extends Controller
         if(!empty($request->file('tor')))
         {
             $file = $request->file('tor');
-            $file_dir = 'storage/Dokumen_baseline/';
+            $file_dir = 'storage/Dokumen_anggaran/';
 
             // menyimpan data file yang diupload ke variabel $file
             $generate = strtotime(Carbon::parse()->now()->format('Y-m-d H:i:s'));
@@ -87,7 +116,7 @@ class DataDukungBaselineController extends Controller
 
             // isi dengan nama folder tempat kemana file diupload
             //$folder_tahun = Carbon::parse()->now()->format('Y')."/".Carbon::parse()->now()->format('m')."/".Carbon::parse()->now()->format('d');
-            $tujuan_upload = $file_dir.$request->id;
+            $tujuan_upload = $file_dir;
 
             if (!file_exists($file_dir)) {
                 mkdir($file_dir, 0777, true);
@@ -95,10 +124,10 @@ class DataDukungBaselineController extends Controller
 
             $file->move($tujuan_upload, $nama_file);
 
-            BaselineDakung::updateOrCreate(
+            AnggaranDakung::updateOrCreate(
                 [
                     'id' => $request->id,
-                    'thang' => Session::get('thang'),
+                    'thang' => 2023,
                 ],
                 [
                     'fileTor' => $nama_file
@@ -111,7 +140,7 @@ class DataDukungBaselineController extends Controller
         if(!empty($request->file('rab')))
         {
             $file = $request->file('rab');
-            $file_dir = 'storage/Dokumen_baseline/';
+            $file_dir = 'storage/Dokumen_anggaran/';
 
             // menyimpan data file yang diupload ke variabel $file
             $generate = strtotime(Carbon::parse()->now()->format('Y-m-d H:i:s'));
@@ -120,7 +149,7 @@ class DataDukungBaselineController extends Controller
 
             // isi dengan nama folder tempat kemana file diupload
             //$folder_tahun = Carbon::parse()->now()->format('Y')."/".Carbon::parse()->now()->format('m')."/".Carbon::parse()->now()->format('d');
-            $tujuan_upload = $file_dir.$request->id;
+            $tujuan_upload = $file_dir;
 
             if (!file_exists($file_dir)) {
                 mkdir($file_dir, 0777, true);
@@ -128,10 +157,10 @@ class DataDukungBaselineController extends Controller
 
             $file->move($tujuan_upload, $nama_file);
 
-            BaselineDakung::updateOrCreate(
+            AnggaranDakung::updateOrCreate(
                 [
                     'id' => $request->id,
-                    'thang' => Session::get('thang'),
+                    'thang' => 2023,
                 ],
                 [
                     'fileRab' => $nama_file
@@ -144,7 +173,7 @@ class DataDukungBaselineController extends Controller
         if(!empty($request->file('lainnya')))
         {
             $file = $request->file('lainnya');
-            $file_dir = 'storage/Dokumen_baseline/';
+            $file_dir = 'storage/Dokumen_anggaran/';
 
             // menyimpan data file yang diupload ke variabel $file
             $generate = strtotime(Carbon::parse()->now()->format('Y-m-d H:i:s'));
@@ -153,7 +182,7 @@ class DataDukungBaselineController extends Controller
 
             // isi dengan nama folder tempat kemana file diupload
             //$folder_tahun = Carbon::parse()->now()->format('Y')."/".Carbon::parse()->now()->format('m')."/".Carbon::parse()->now()->format('d');
-            $tujuan_upload = $file_dir.$request->id;
+            $tujuan_upload = $file_dir;
 
             if (!file_exists($file_dir)) {
                 mkdir($file_dir, 0777, true);
@@ -161,10 +190,10 @@ class DataDukungBaselineController extends Controller
 
             $file->move($tujuan_upload, $nama_file);
 
-            BaselineDakung::updateOrCreate(
+            AnggaranDakung::updateOrCreate(
                 [
                     'id' => $request->id,
-                    'thang' => Session::get('thang'),
+                    'thang' => 2023,
                 ],
                 [
                     'fileLainnya' => $nama_file
@@ -174,7 +203,9 @@ class DataDukungBaselineController extends Controller
             echo 'Lainnya Tersimpan';
         }
 
-        return redirect('datadukungbaseline')->with('msg', 'Dokumen '.$request->id.' berhasil di upload.');  
+        Session::flash('message', 'Berhasil ditambahkan!');
+        Session::flash('message_type', 'success');
+        return redirect()->route('paguindikatif.dakung', Crypt::encrypt($request->kodeSatker));
     }
 
 }

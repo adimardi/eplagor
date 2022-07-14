@@ -33,7 +33,7 @@ class KenaikanKelasPaController extends Controller
     public function index()
     {
         $data['config'] = $this->config;
-        return view('usulan/kenaikankelaspa.index', $data);
+        return view('usulan.kenaikankelaspa.index', $data);
     }
 
     public function create()
@@ -46,7 +46,7 @@ class KenaikanKelasPaController extends Controller
     public function show($id)
     {
       	$data['config'] = $this->config;
-        return view('usulan/kenaikankelaspa.show', $data);  
+        return view('usulan.kenaikankelaspa.show', $data);  
     }
 
     public function store(Request $request)

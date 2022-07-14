@@ -4016,9 +4016,8 @@ textarea.form-control-lg {
   .page-link:focus {
     z-index: 3;
     color: #e91e63;
-    background-color: #f0f2f5;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(233, 30, 99, 0.25); }
+    background-color: transparent;
+    outline: 0; }
 
 .page-item:not(:first-child) .page-link {
   margin-left: -1px; }
@@ -4026,8 +4025,8 @@ textarea.form-control-lg {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #e91e63;
-  border-color: #e91e63; }
+  background-color: #340b91;
+  border-color: #083064; }
 
 .page-item.disabled .page-link {
   color: #6c757d;
@@ -13962,13 +13961,17 @@ label,
   max-width: 2rem; }
 
 .bg-gradient-primary {
-  background-image: linear-gradient(195deg, #C62744 0%, #271C8B 100%); }
+  background-image: linear-gradient(195deg, #429CF0 0%, #271C8B 100%); }
 
 .bg-gradient-secondary {
   background-image: linear-gradient(195deg, #747b8a 0%, #495361 100%); }
 
-.bg-gradient-success {
+  /*.bg-gradient-success {
   background-image: linear-gradient(195deg,#66bb6a,#43a047); }
+  */
+
+  .bg-gradient-success {
+  background-image: linear-gradient(195deg,#3c80da,#183d95); }
 
 .bg-gradient-info {
   background-image: linear-gradient(195deg, #49a3f1 0%, #1A73E8 100%); }
@@ -13983,7 +13986,7 @@ label,
   background-image: linear-gradient(195deg, #EBEFF4 0%, #CED4DA 100%); }
 
 .bg-gradient-dark {
-  background-image: linear-gradient(195deg, #1c1c97 0%, #931717 100%); }
+  background-image: linear-gradient(195deg, #380759 0%, #290886 100%); }
 
 .bg-gradient-faded-primary {
   background-image: radial-gradient(370px circle at 80% 50%, rgba(233, 30, 99, 0.6) 0, #c1134e 100%); }
@@ -15116,9 +15119,9 @@ hr.horizontal {
     .sidenav .sidenav-toggler {
       padding: 1.5rem; }
     .sidenav.fixed-start + .main-content {
-      margin-left: 260px; }
+      margin-left: 250px; }
     .sidenav.fixed-end + .main-content {
-      margin-right: 260px; } }
+      margin-right: 250px; } }
   .sidenav .navbar-heading .docs-mini {
     padding-left: 3px; }
   .sidenav .navbar-heading {
@@ -15152,9 +15155,9 @@ hr.horizontal {
 
 @media (max-width: 1199.98px) {
   .g-sidenav-show.rtl .sidenav {
-    transform: translateX(17.125rem); }
+    transform: translateX(20.125rem); }
   .g-sidenav-show:not(.rtl) .sidenav {
-    transform: translateX(-17.125rem); }
+    transform: translateX(-20.125rem); }
   .g-sidenav-show .sidenav.fixed-start + .main-content {
     margin-left: 0 !important; }
   .g-sidenav-show.g-sidenav-pinned .sidenav {

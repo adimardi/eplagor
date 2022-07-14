@@ -62,6 +62,8 @@ use App\UraianAnggaran;
 // usulan kenaikan kelas
 use App\UsulanKelasPa;
 //use App\UsulanKelasPn;
+use App\Anggaran;
+use App\AnggaranDakung;
 
 
 class ApiController extends Controller
@@ -173,13 +175,13 @@ class ApiController extends Controller
         $this->filterKatagori($pagu);
 
         return Datatables::eloquent($pagu)
-                        ->addColumn('action', function($pagu){
-                            $btn =   '<button type="button" class="btn btn-info btn-round ml-0 mb-0" type="button" title="Take" onclick="take(\''.$pagu->id.'\')"><i class="fa fa-edit"></i></button>';         
-                            return $btn;
-                        })
+            ->addColumn('action', function($pagu){
+                $btn =   '<button type="button" class="btn btn-info btn-round ml-0 mb-0" type="button" title="Take" onclick="take(\''.$pagu->id.'\')"><i class="fa fa-edit"></i></button>';         
+            return $btn;
+            })
 
-                        ->rawColumns(['action'])
-                        ->toJson();
+        ->rawColumns(['action'])
+        ->toJson();
     }
 
     // PRIORITAS
@@ -297,6 +299,143 @@ class ApiController extends Controller
     }
     // -- END BASELINE 1
 
+    // Pagu Indikatif
+    public function apiIndikatif()
+    {
+        $indikatif = Anggaran::select(
+                                        'reffsatker_id',
+                                        'thang',
+                                        DB::raw('SUM(total) as jumlah')
+                                     )
+                                ->where('thang', 2023)
+                                ->groupBy('reffsatker_id', 'thang');
+
+        $indikatif = $indikatif->with(['reffsatker']);
+        $this->filterUser($indikatif);
+        $this->filterKatagori($indikatif);
+
+        return Datatables::eloquent($indikatif)
+            ->addColumn('satker', function($indikatif){
+                $btn =  '
+                            <a href="'.route('paguindikatif.show', Crypt::encrypt($indikatif->reffsatker_id)).'" style="padding: 8px 13px;" title="Detail">
+                                '.$indikatif->reffsatker->nama_satker_lengkap.'
+                            </a>
+                        ';
+
+                return $btn;
+            })
+            ->addColumn('total_belanja_pegawai', function($indikatif){
+                $totals = Anggaran::where('thang', 2023)
+                                    ->where('reffsatker_id', $indikatif->reffsatker_id)
+                                    ->where('kode_akun','LIKE','51%')
+                                    ->sum('total');
+                return($totals);
+            })
+            ->addColumn('total_belanja_barang', function($base){
+                $totals = Anggaran::where('thang', 2023)
+                                    ->where('reffsatker_id', $base->reffsatker_id)
+                                    ->where('kode_akun','LIKE', '52%')
+                                    ->sum('total');
+                return($totals);
+            })
+            ->addColumn('total_belanja_modal', function($base){
+                $totals = Anggaran::where('thang', 2023)
+                                    ->where('reffsatker_id', $base->reffsatker_id)
+                                    ->where('kode_akun','LIKE', '53%')
+                                    ->sum('total');
+                return($totals);
+            })
+            ->addColumn('file', function($indikatif){
+                $btn =  '
+                            <a href="' . route('paguindikatif.dakung', Crypt::encrypt($indikatif->reffsatker_id)) .'" title="Detail">
+                                Lihat File
+                            </a>
+                        ';
+
+                return $btn;
+            })
+
+        ->rawColumns(['satker', 'total_belanja_pegawai', 'total_belanja_barang', 'total_belanja_modal', 'file'])
+        ->toJson();
+    }
+
+    public function apiRincianIndikatif()
+    {
+        $indikatif = Anggaran::where('reffsatker_id', request('unik'))
+                             ->where('thang', 2023);
+
+        $indikatif = $indikatif->with(['reffsatker']);
+        $this->filterUser($indikatif);
+        $this->filterKatagori($indikatif);
+
+        return Datatables::eloquent($indikatif)
+
+        ->rawColumns([])
+        ->toJson();
+    }
+
+    public function apiDakungIndikatif()
+    {
+        $dakung = Anggaran::select(
+                                    'pagu_id',
+                                    'reffsatker_id',
+                                    'kode_program',
+                                    'kode_kegiatan',
+                                    'kode_output',
+                                    'kode_suboutput',
+                                    'kode_komponen',
+                                    'kode_subkomponen',
+                                    'uraian_subkomponen',
+                                    DB::raw('SUM(total) as total') 
+                                  )
+                            ->where('thang', 2023)
+                            ->groupBy('pagu_id', 
+                                      'reffsatker_id',
+                                      'kode_program', 
+                                      'kode_kegiatan', 
+                                      'kode_output', 
+                                      'kode_suboutput', 
+                                      'kode_komponen',
+                                      'kode_subkomponen',
+                                      'uraian_subkomponen'
+                                     );
+
+        $dakung = $dakung->with(['reffsatker']);
+        $this->filterUser($dakung);
+        $this->filterKatagori($dakung);
+
+        return Datatables::eloquent($dakung)
+            ->addColumn('file', function($dakung){
+                $unik = $dakung->reffsatker_id.$dakung->kode_program.$dakung->kode_kegiatan.$dakung->kode_output.$dakung->kode_suboutput.$dakung->kode_komponen;
+                $files = AnggaranDakung::where('id', $dakung->pagu_id)->first();
+
+                if(!empty($files)){
+                    $btn =  '
+                                <a href="'.asset('storage/Dokumen_anggaran/'.$unik.'/'.$files->fileTor).'" data-toggle="tooltip" data-placement="top" title="File TOR" target="_blank"><i class="fa fa-file-pdf-o fa-2x text-success" aria-hidden="true"></i>
+                                </a>
+                                <a href="'.asset('storage/Dokumen_anggaran/'.$unik.'/'.$files->fileRab).'" data-toggle="tooltip" data-placement="top" title="File RAB" style="margin-left: 5px;" target="_blank"><i class="fa fa-file-pdf-o fa-2x text-success" aria-hidden="true"></i>
+                                </a>
+                                <a href="'.asset('storage/Dokumen_anggaran/'.$unik.'/'.$files->fileLainnya).'" data-toggle="tooltip" data-placement="top" title="File Lainnya" style="margin-left: 5px;" target="_blank"><i class="fa fa-file-pdf-o fa-2x text-success" aria-hidden="true"></i>
+                                </a>
+                            ';
+                } else {
+                    $btn =  '
+                                <a href="javascript:void(0)" class="btn btn-danger btn-upload ms-0 mb-0" style="padding: 8px 13px;" data-toggle="tooltip" data-placement="top" title="Upload dokumen" ><i class="fa fa-upload" aria-hidden="true"></i></a>
+                            ';   
+                }
+
+                return $btn;
+            })
+
+            ->addColumn('coa', function($dakung){
+                $kode = $dakung->kode_kegiatan.'.'.$dakung->kode_output.'.'.$dakung->kode_suboutput.'.'.$dakung->kode_komponen;
+                return ($kode);
+            })
+
+        ->rawColumns(['coa', 'file'])
+        ->toJson();
+    }
+
     // -- START BASELINE 3
     public function apiBaseline3()
     {
@@ -397,7 +536,7 @@ class ApiController extends Controller
 
     public function apiDataBaseline3()
     {
-        $base = baseline::where('thang', Session::get('thang'))
+        $base = Baseline::where('thang', Session::get('thang'))
                         ->where('reffsatker_id', request('unik'));
 
         $base = $base->with(['reffsatker']);
