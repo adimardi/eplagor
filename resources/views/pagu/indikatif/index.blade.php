@@ -56,7 +56,7 @@
                       { data: 'total_belanja_pegawai', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
                       { data: 'total_belanja_barang', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
                       { data: 'total_belanja_modal', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
-                      { data: 'jumlah', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
+                      { data: 'total', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
                       { data: 'file', sClass: "text-secondary mb-0 text-center", width: "50px"},
                   ],
           fixedColumns: {

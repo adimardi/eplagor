@@ -46,11 +46,11 @@ Route::group(['middleware'=>['auth','verified']], function (){
     Route::post('hapus_prioritas', 'PaguController@hapus_prioritas')->name('pagu.hapus_prioritas');
     Route::get('hapus', 'PaguController@hapus')->name('pagu.hapus');
 
-    Route::get('anggaran', 'PaguController@anggaran')->name('pagu.anggaran');
+    Route::get('paguanggaran', 'PaguController@anggaran')->name('pagu.anggaran');
     Route::get('lokasi', 'PaguController@alokasi')->name('pagu.alokasi');
-    Route::get('revisi', 'PaguController@revisi')->name('pagu.revisi');
-
+    Route::get('pagu.revisi', 'PaguController@revisi')->name('pagu.revisi');
     Route::resource('pagu', 'PaguController');
+
 
     // Usulan
     Route::group(['as' => 'usulan.', 'prefix' => 'usulan', 'namespace' => 'Usulan'], function () {
@@ -88,6 +88,31 @@ Route::group(['middleware'=>['auth','verified']], function (){
     Route::get('paguindikatif/dakung/{id?}', 'PaguIndikatifController@dakung')->name('paguindikatif.dakung');
     Route::post('paguindikatif/uploads', 'PaguIndikatifController@uploads')->name('paguindikatif.uploads');
     Route::resource('paguindikatif', 'PaguIndikatifController');
+
+    Route::resource('paguindikatif', 'PaguIndikatifController');
+
+    Route::resource('akun', 'AkunController');
+    Route::get('akun/rincian/{kode?}', 'AkunController@rincian')->name('akun.rincian');
+
+    Route::get('anggaran/dokumen/{id?}', 'AnggaranController@dokumen')->name('anggaran.dokumen');
+    Route::get('anggaran/cetak/{id}', 'AnggaranController@cetak')->name('anggaran.cetak');
+    Route::resource('anggaran', 'AnggaranController');
+
+    // ABT
+    Route::post('abt/getpagu', 'AbtController@getpagu')->name('abt.getpagu');
+    Route::post('abt/store_items', 'AbtController@store_items')->name('abt.store_items');
+    Route::get('abt/add/{unik?}', 'AbtController@add')->name('abt.add');
+    Route::get('abt/hapus/{unik?}', 'AbtController@hapus')->name('abt.hapus');
+    Route::get('abt/save/{unik?}', 'AbtController@save')->name('abt.save');
+
+    Route::get('abt/verifikasi/{unik?}/{param?}', 'AbtController@verifikasi')->name('abt.verifikasi');
+    Route::post('abt/verified', 'AbtController@verified')->name('abt.verified');
+    Route::post('abt/anggaran_disetujui', 'AbtController@anggaran_disetujui')->name('abt.anggaran_disetujui');
+    Route::resource('abt', 'AbtController');
+
+    Route::get('revisi/add/{unik?}', 'RevisiController@add')->name('revisi.add');
+    Route::resource('revisi', 'RevisiController');
+
 });
 
 
@@ -121,4 +146,17 @@ Route::group(['as'=>'api.','prefix'=>'api','middleware'=>['auth','verified']], f
     Route::get('indikatif', 'ApiController@apiIndikatif')->name('indikatif');
     Route::get('rincianindikatif', 'ApiController@apiRincianIndikatif')->name('rincianindikatif');
     Route::get('dakungindikatif', 'ApiController@apiDakungIndikatif')->name('dakungindikatif');
+
+    // Anggaran
+    Route::get('anggaran', 'ApiController@apiAnggaran')->name('anggaran');
+    Route::get('dokumenanggaran', 'ApiController@apiDokumenAnggaran')->name('dokumenanggaran');
+
+    // Akun
+    Route::get('akun', 'ApiController@apiAkun')->name('akun');
+    Route::get('rincianakun', 'ApiController@apiRincianAkun')->name('rincianakun');
+
+    // ABT
+    Route::get('usulanabt', 'ApiController@apiUsulanAbt')->name('usulanabt');
+    Route::get('paguabt', 'ApiController@apiPaguAbt')->name('paguabt');
+    Route::get('itemsabt/{unik?}', 'ApiController@apiItemsAbt')->name('itemsabt');
 });

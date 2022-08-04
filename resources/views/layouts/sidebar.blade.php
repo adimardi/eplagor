@@ -97,13 +97,27 @@
         </div>
       </li>
 
-      <!-- Menu Pagu Indikatif -->
+      <!-- Menu Pagu Anggaran -->
       <li class="nav-item">
-        <a class="nav-link text-white {{ request()->routeIs('paguindikatif.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('paguindikatif.index')}}">
+        <a class="nav-link text-white {{ request()->routeIs('anggaran.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('anggaran.index')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="ni ni-money-coins text-lg"></i>
           </div>
           <span class="nav-link-text ms-1">Pagu Anggaran</span>
+        </a>
+      </li>
+      <!-- Menu Pagu Revisi -->
+      <li class="nav-item ">
+        <a class="nav-link text-white {{ request()->routeIs('revisi.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('revisi.index')}}">
+          <span class="material-icons">post_add</span>
+          <span class="sidenav-normal  ms-2  ps-1"> Revisi Anggaran </span>
+        </a>
+      </li>
+      <!-- Menu Usulan ABT -->
+      <li class="nav-item ">
+        <a class="nav-link text-white {{ request()->routeIs('abt.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('abt.index')}}">
+          <span class="material-icons">post_add</span>
+          <span class="sidenav-normal  ms-2  ps-1"> Usulan ABT </span>
         </a>
       </li>
 
@@ -155,6 +169,7 @@
         </div>
       </li>
 
+      <!--
       <li class="nav-item">
         <a class="nav-link text-white {{ request()->routeIs('baseline1.dakung.', 'all') ? ' active bg-gradient-primary' : '' }}" href="{{route('baseline1.dakung', 'all')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -163,6 +178,7 @@
           <span class="nav-link-text ms-1">Usulan ABT</span>
         </a>
       </li>
+      -->
 
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Usulan Kenaikan Kelas</h6>
@@ -197,6 +213,15 @@
             <span class="material-icons">people</span>
           </div>
           <span class="nav-link-text ms-1">Data User</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white {{ request()->routeIs('akun.*') ? ' active bg-gradient-primary' : '' }}" href="{{route('akun.index')}}">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <span class="material-icons">people</span>
+          </div>
+          <span class="nav-link-text ms-1">Rekap Akun</span>
         </a>
       </li>
 

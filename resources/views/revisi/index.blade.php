@@ -6,18 +6,23 @@
   	$('#tableBaseline thead tr').clone(true).appendTo( '#tableBaseline thead' );
         $('#tableBaseline thead tr:eq(1) th').each( function (i) {
             var title = $(this).text();
-            if(title == 'No' || title == 'Aksi' || title == 'Data Dukung')
+            if(title == 'No' 
+            	|| title == 'Aksi' 
+            	|| title == 'Data Dukung'
+            	|| title == 'Pegawai'
+            	|| title == 'Barang'
+            	|| title == 'Modal'
+            	|| title == 'Tanggal Surat'
+            	|| title == 'File')
             {
-              $(this).html( '###' );
+              $(this).html('###').css("textAlign", "center");
             }
-            else if(title == 'XXX')
-            {
+            else if(title == 'XXX'){
               $(this).html( '<a href="javascript:void(0)" onclick="deleteData()" type="button" class=""><span><i class="fas fa-search fa-2x"></i></span></a><a href="javascript:void(0)" onclick="deleteData()" type="button" class=""><span><i class="fas fa-times-circle fa-2x"></i></span></a>' )
-            }
-            else
-            {
+            } else {
             	$(this).html( '<input type="text" style="width:100%;" value="" placeholder="Cari '+title+'" />' );
             }
+
             $('input', this ).on( 'keyup change', function () {
                 if ( table.column(i).search() !== this.value ) {
                     table
@@ -27,14 +32,13 @@
                 }
             });
         });
-
         
       	var table = $('#tableBaseline')
       	.DataTable({
           	processing: true,
           	serverSide: true,
           	ajax: {
-              	"url"  : "{{ route ('api.baseline3') }}", 
+              	"url"  : "{{ route ('api.usulanabt') }}", 
               	"data" : function (d) {
                     d.filter_wilayah = $('#filter_wilayah').val();
                     d.filter_eselon = $('#filter_eselon').val();
@@ -67,16 +71,16 @@
                             	return meta.row + meta.settings._iDisplayStart + 1;
                            }
                       	},
-                      	//{ data: 'reffsatker.nama_eselon', sClass: "text-secondary mb-0 text-left"},
                       	{ data: 'reffsatker.kode_satker', sClass: "text-secondary mb-0 text-center", width: "50px"},
-                      	{ data: 'satker', sClass: "text-secondary mb-0 text-left"},
-                      	{ data: 'total_belanja_pegawai', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
-                      	{ data: 'total_belanja_barang_operasional', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
-                      	{ data: 'total_belanja_barang_nonoperasional', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
-                      	{ data: 'total_belanja_modal_tanah', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
-                      	{ data: 'total_belanja_modal_gedung', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
-                        { data: 'total_belanja_modal_mesin', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
-                      	{ data: 'total', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
+                      	{ data: 'reffsatker.nama_satker_lengkap', sClass: "text-secondary mb-0 text-left"},
+                      	{ data: 'nomor_surat', sClass: "text-secondary mb-0 text-center", width: "50px"},
+                      	{ data: 'tanggal_surat', sClass: "text-secondary mb-0 text-center", width: "50px"},
+                      	{ data: 'perihal_surat', sClass: "text-secondary mb-0 text-left"},
+                      	{ data: 'tpegawai', sClass: "text-secondary mb-0 text-end", render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
+                      	{ data: 'tbarang', sClass: "text-secondary mb-0 text-end",  render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
+                      	{ data: 'tmodal', sClass: "text-secondary mb-0 text-end",  render: $.fn.dataTable.render.number( '.', '.'), width: "50px"},
+                     	{ data: 'status', sClass: "text-secondary mb-0 text-center", width: "10px"},
+                     	{ data: 'file', sClass: "text-secondary mb-0 text-center", width: "10px"},
                       	{ data: 'aksi', sClass: "text-secondary mb-0 text-center", width: "10px"},
                   	],
           	fixedColumns: {
@@ -124,26 +128,30 @@
           			</div>
         		</div>
         		<div class="card-body px-0 pb-2">
+
 		          	<div class="row p-3">
 		            	<div class="col-12">
+
+		            		<a href="{{ route('revisi.add', Illuminate\Support\Str::random(5).substr(time(), 6,8).Illuminate\Support\Str::random(3)) }}" class="btn bg-gradient-info">
+								Tambah Data
+							</a>
+
 		            		<div class="table-responsive p-3">
 				            	<table id="tableBaseline" class="table table-resposive table-sm order-column nowrap align-items-center mb-0" width="100%">
 				              		<thead>
 				                		<tr>
 				                  			<th class="text-uppercase text-secondary font-weight-bolder">No</th>
-                                            <!--
-				                  			<th class="text-uppercase text-secondary font-weight-bolder">Eselon</th>
-                                            -->
 						                  	<th class="text-uppercase text-secondary font-weight-bolder">Kode Satker</th>
 						                  	<th class="text-uppercase text-secondary font-weight-bolder">Nama Satker</th>
+						                  	<th class="text-uppercase text-secondary font-weight-bolder">Nomor Surat</th>
+						                  	<th class="text-uppercase text-secondary font-weight-bolder">Tanggal Surat</th>
+						                  	<th class="text-uppercase text-secondary font-weight-bolder">Perihal Surat</th>
 						                  	<th class="text-uppercase text-secondary font-weight-bolder">Pegawai</th>
-						                  	<th class="text-uppercase text-secondary font-weight-bolder">Operasioanal</th>
-						                  	<th class="text-uppercase text-secondary font-weight-bolder">Non Operasional</th>
-						                  	<th class="text-uppercase text-secondary font-weight-bolder">Tanah</th>
-						                  	<th class="text-uppercase text-secondary font-weight-bolder">Gedung</th>
-						                  	<th class="text-uppercase text-secondary font-weight-bolder">Peralatan dan Mesin</th>
-						                  	<th class="text-uppercase text-secondary font-weight-bolder">Total Pagu</th>
-						                  	<th class="text-center text-uppercase text-secondary font-weight-bolder">Data Dukung</th>
+						                  	<th class="text-uppercase text-secondary font-weight-bolder">Barang</th>
+						                  	<th class="text-uppercase text-secondary font-weight-bolder">Modal</th>
+						                  	<th class="text-center text-uppercase text-secondary font-weight-bolder">Status</th>
+						                  	<th class="text-center text-uppercase text-secondary font-weight-bolder">File</th>
+						                  	<th class="text-center text-uppercase text-secondary font-weight-bolder">Aksi</th>
 				                		</tr>
 				              		</thead>
 				           		</table>

@@ -1,5 +1,26 @@
 @section('js')
 
+@foreach($pegawai as $data)
+@php
+    $tangp[] = $data->thang; 
+    $totalp[] = $data->total;
+@endphp
+@endforeach
+
+@foreach($barang as $data)
+@php
+    $tangb[] = $data->thang; 
+    $totalb[] = $data->total;
+@endphp
+@endforeach
+
+@foreach($modal as $data)
+@php
+    $tangm[] = $data->thang; 
+    $totalm[] = $data->total;
+@endphp
+@endforeach
+
 <script>
   var ctxpegawai = document.getElementById("pegawai").getContext("2d");
   var ctxbarang = document.getElementById("barang").getContext("2d");
@@ -8,7 +29,7 @@
   new Chart(ctxpegawai, {
     type: "bar",
     data: {
-      labels: ["2020", "2021", "2022"],
+      labels: <?php echo json_encode($tangp); ?>,
       datasets: [{
         label: "Total Pagu ",
         tension: 0,
@@ -21,7 +42,7 @@
         borderWidth: 4,
         backgroundColor: "orange",
         fill: false,
-        data: [2590492906000, 1743638173000, 11820133400000],
+        data: <?php echo json_encode($totalp); ?>,
         maxBarThickness: 35
       }],
     },
@@ -88,7 +109,7 @@
   new Chart(ctxbarang, {
     type: "line",
     data: {
-      labels: ["2020", "2021", "2022"],
+      labels: <?php echo json_encode($tangb); ?>,
       datasets: [{
         label: "Mobile apps",
         tension: 0,
@@ -101,7 +122,7 @@
         borderWidth: 4,
         backgroundColor: "transparent",
         fill: true,
-        data: [2590492906000, 1743638173000, 11820133400000],
+        data: <?php echo json_encode($totalb); ?>,
         maxBarThickness: 6
       }],
     },
@@ -168,7 +189,7 @@
   new Chart(ctxmodal, {
     type: "line",
     data: {
-      labels: ["2020", "2021", "2022"],
+      labels: <?php echo json_encode($tangm); ?>,
       datasets: [{
         label: "Mobile apps",
         tension: 0,
@@ -181,7 +202,7 @@
         borderWidth: 4,
         backgroundColor: "transparent",
         fill: true,
-        data: [2590492906000, 1743638173000, 11820133400000],
+        data: <?php echo json_encode($totalm); ?>,
         maxBarThickness: 6
       }],
     },
@@ -256,6 +277,8 @@
 <div class="container-fluid py-3">
   <div class="page-header min-height-300 border-radius-xl mt-0" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1920&amp;q=80');">
     <span class="mask bg-gradient-primary opacity-3"></span>
+    <h6 style="margin-top: -175px; margin-left: 30px; float: left; color: white;">Selamat Datang</h6>
+    <h5 style="margin-top: -130px; margin-left: -93px; float: left; color: white;">{{ Auth::user()->name }}</h5>
   </div>
   <div class="row mx-3 mx-md-4 mt-n10">
       <div class="col-12">
@@ -280,7 +303,7 @@
                       </div>
                       <div class="text-end pt-4">
                         <p class="mt-0 mb-0 text-capitalize" style="font-size: 25px; line-height: 28px;">Belanja Pegawai</p>
-                        <h4 class="mb-0" style="font-size: 30px;">Rp. 7.486.002.321.000</h4>
+                        <h4 class="mb-0" style="font-size: 25px;">Rp. {{ number_format($tpegawai) }}</h4>
                       </div>
                     </div>
                   </div>
@@ -293,7 +316,7 @@
                       </div>
                       <div class="text-end pt-4">
                         <p class="mt-0 mb-0 text-capitalize" style="font-size: 25px; line-height: 28px;">Belanja Barang</p>
-                        <h4 class="mb-0" style="font-size: 30px;">Rp. 2.590.492.906.000</h4>
+                        <h4 class="mb-0" style="font-size: 25px;">Rp. {{ number_format($tbarang) }}</h4>
                       </div>
                     </div>
                   </div>
@@ -306,7 +329,7 @@
                       </div>
                       <div class="text-end pt-4">
                         <p class="mt-0 mb-0 text-capitalize" style="font-size: 25px; line-height: 28px;">Belanja Modal</p>
-                        <h4 class="mb-0" style="font-size: 30px;">Rp. 1.743.638.173.000</h4>
+                        <h4 class="mb-0" style="font-size: 25px;">Rp. {{ number_format($tmodal) }}</h4>
                       </div>
                     </div>
                   </div>
@@ -319,7 +342,7 @@
                       </div>
                       <div class="text-end pt-4">
                         <p class="mt-0 mb-0 text-capitalize" style="font-size: 25px; line-height: 28px;">Total Pagu</p>
-                        <h4 class="mb-0" style="font-size: 30px;">Rp. 11.820.133.400.000</h4>
+                        <h4 class="mb-0" style="font-size: 25px;">Rp. {{ number_format($total) }}</h4>
                       </div>
                     </div>
                   </div>
@@ -339,23 +362,21 @@
                         </div>
                       </div>
                       <div class="card-body">
-                        <h6 class="mb-0 "> Statistik Belanja Pegawai 3 Tahun Terakhir </h6> 
+                        <h6 class="mb-0 "> Statistik Belanja Pegawai 5 Tahun Terakhir </h6> 
 
                         <hr class="dark horizontal my-2">
 
                         <ul class="list-group">
                           <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Tahun 2020
-                            <span class="text-primary">Rp. 11.820.133.400.000</span>
+                            Tahun {{ Session::get('thang') }}
+                            <span class="text-primary">Rp. {{ number_format($tpegawai) }}</span>
                           </li>
+                          @foreach($pegawai as $data)
                           <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Tahun 2021
-                            <span class="text-primary">Rp. 11.820.133.400.000</span>
+                            Tahun {{ $data->thang }}
+                            <span class="text-primary">Rp. {{ number_format($data->total) }}</span>
                           </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Tahun 2022
-                            <span class="text-primary">Rp. 11.820.133.400.000</span>
-                          </li>
+                          @endforeach
                         </ul>
                       </div>
                     </div>
@@ -371,23 +392,21 @@
                         </div>
                       </div>
                       <div class="card-body">
-                        <h6 class="mb-0 "> Statistik Belanja Barang 3 Tahun Terakhir </h6> 
+                        <h6 class="mb-0 "> Statistik Belanja Barang 5 Tahun Terakhir </h6> 
 
                         <hr class="dark horizontal my-2">
 
                         <ul class="list-group">
                           <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Tahun 2020
-                            <span class="text-primary">Rp. 11.820.133.400.000</span>
+                            Tahun {{ Session::get('thang') }}
+                            <span class="text-primary">Rp. {{ number_format($tbarang) }}</span>
                           </li>
+                          @foreach($barang as $data)
                           <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Tahun 2021
-                            <span class="text-primary">Rp. 11.820.133.400.000</span>
+                            Tahun {{ $data->thang }}
+                            <span class="text-primary">Rp. {{ number_format($data->total) }}</span>
                           </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Tahun 2022
-                            <span class="text-primary">Rp. 11.820.133.400.000</span>
-                          </li>
+                          @endforeach
                         </ul>
                       </div>
                     </div>
@@ -403,23 +422,21 @@
                         </div>
                       </div>
                       <div class="card-body">
-                        <h6 class="mb-0 "> Statistik Belanja Modal 3 Tahun Terakhir </h6> 
+                        <h6 class="mb-0 "> Statistik Belanja Modal 5 Tahun Terakhir </h6> 
 
                         <hr class="dark horizontal my-2">
 
                         <ul class="list-group">
                           <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Tahun 2020
-                            <span class="text-primary">Rp. 11.820.133.400.000</span>
+                            Tahun {{ Session::get('thang') }}
+                            <span class="text-primary">Rp. {{ number_format($tmodal) }}</span>
                           </li>
+                          @foreach($modal as $data)
                           <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Tahun 2021
-                            <span class="text-primary">Rp. 11.820.133.400.000</span>
+                            Tahun {{ $data->thang }}
+                            <span class="text-primary">Rp. {{ number_format($data->total) }}</span>
                           </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Tahun 2022
-                            <span class="text-primary">Rp. 11.820.133.400.000</span>
-                          </li>
+                          @endforeach
                         </ul>
                       </div>
                     </div>

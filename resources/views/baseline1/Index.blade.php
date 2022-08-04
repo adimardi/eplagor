@@ -557,7 +557,7 @@
             },
             error:function(data) {
                 alert("Data gagal ditampilkan!");
-                }
+            }
        	});
     }
 </script>
