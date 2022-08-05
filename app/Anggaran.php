@@ -10,7 +10,7 @@ use Alexmg86\LaravelSubQuery\Traits\LaravelSubQueryTrait;
 
 use DB;
 
-class anggaran extends Model
+class Anggaran extends Model
 {
     use LaravelSubQueryTrait;
 
