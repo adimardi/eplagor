@@ -41,8 +41,8 @@
 
 @php
 	$satker = App\reffsatker::where('id', $id)->first();
-    $totals = App\anggaran::where('thang', 2023)->where('reffsatker_id', $id)->sum('total');
-    $kode_programs = App\anggaran::where('thang', 2023)
+    $totals = App\Anggaran::where('thang', 2023)->where('reffsatker_id', $id)->sum('total');
+    $kode_programs = App\Anggaran::where('thang', 2023)
                                  ->where('reffsatker_id', $id)
                                  ->groupBy('kode_program')
                                  ->selectRaw('kode_program, SUM(total) as total_programs')
@@ -179,7 +179,7 @@
 		</tr>
 			<!-- Kode Kegiatan -->
 			@php
-			$kode_kegiatans = App\anggaran::where('thang', 2023)
+			$kode_kegiatans = App\Anggaran::where('thang', 2023)
 	                                      ->where('reffsatker_id', $id)
 	                                      ->where('kode_program', $programs->kode_program)
 	                                      ->groupBy('kode_kegiatan')
@@ -216,7 +216,7 @@
 			</tr>
 				<!-- Kode Output -->
 				@php
-				$kode_outputs = App\anggaran::where('thang', 2023)
+				$kode_outputs = App\Anggaran::where('thang', 2023)
 	                                        ->where('reffsatker_id', $id)
 		                                    ->where('kode_program', $programs->kode_program)
 		                                    ->where('kode_kegiatan', $kegiatans->kode_kegiatan)
@@ -254,7 +254,7 @@
 				</tr>
 					<!-- Kode Sub Output -->
 					@php
-					$kode_suboutputs = App\anggaran::where('thang', 2023)
+					$kode_suboutputs = App\Anggaran::where('thang', 2023)
 		                                        	->where('reffsatker_id', $id)
 			                                    	->where('kode_program', $programs->kode_program)
 			                                    	->where('kode_kegiatan', $kegiatans->kode_kegiatan)
@@ -294,7 +294,7 @@
 
 						<!-- Kode Komponen -->
 						@php
-						$kode_komponens = App\anggaran::where('thang', 2023)
+						$kode_komponens = App\Anggaran::where('thang', 2023)
 			                                        	->where('reffsatker_id', $id)
 				                                    	->where('kode_program', $programs->kode_program)
 				                                    	->where('kode_kegiatan', $kegiatans->kode_kegiatan)
@@ -335,7 +335,7 @@
 
 							<!-- Kode Sub Komponen -->
 							@php
-							$kode_subkomponens = App\anggaran::where('thang', 2023)
+							$kode_subkomponens = App\Anggaran::where('thang', 2023)
 				                                        	->where('reffsatker_id', $id)
 					                                    	->where('kode_program', $programs->kode_program)
 					                                    	->where('kode_kegiatan', $kegiatans->kode_kegiatan)
@@ -374,7 +374,7 @@
 
 								<!-- Kode Akun -->
 								@php
-								$kode_akuns = App\anggaran::where('thang', 2023)
+								$kode_akuns = App\Anggaran::where('thang', 2023)
 					                                        	->where('reffsatker_id', $id)
 						                                    	->where('kode_program', $programs->kode_program)
 						                                    	->where('kode_kegiatan', $kegiatans->kode_kegiatan)
@@ -399,7 +399,7 @@
 										{{ $uraian->deskripsi }}
 
 										@php
-										$dataakuns = App\anggaran::where('thang', 2023)
+										$dataakuns = App\Anggaran::where('thang', 2023)
 							                                 	 ->where('reffsatker_id', $id)
 								                             	 ->where('kode_akun', $akuns->kode_akun)
 							                                 	 ->get();
@@ -418,7 +418,7 @@
 										{{ number_format($akuns->total_akuns) }}
 
 										@php
-										$jumlahakuns = App\anggaran::where('thang', 2023)
+										$jumlahakuns = App\Anggaran::where('thang', 2023)
 							                                 	 ->where('reffsatker_id', $id)
 								                             	 ->where('kode_akun', $akuns->kode_akun)
 							                                 	 ->get();
