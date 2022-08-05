@@ -66,7 +66,7 @@ use App\AnggaranDakung;
 
 
 use App\Worksheet;
-use App\anggaran;
+use App\Anggaran;
 
 // ABT
 use App\abt_usulan;
@@ -308,7 +308,7 @@ class ApiController extends Controller
     // Pagu Anggaran 2023
     public function apiAnggaran()
     {
-        $anggaran = anggaran::selectRaw('reffsatker_id, thang, SUM(total) as total')
+        $anggaran = Anggaran::selectRaw('reffsatker_id, thang, SUM(total) as total')
                             ->where('thang', 2023)
                             ->groupBy('reffsatker_id', 'thang');
 
@@ -327,21 +327,21 @@ class ApiController extends Controller
                 return $btn;
             })
             ->addColumn('total_belanja_pegawai', function($anggaran){
-                $totals = anggaran::where('thang', 2023)
+                $totals = Anggaran::where('thang', 2023)
                                   ->where('reffsatker_id', $anggaran->reffsatker_id)
                                   ->where('kode_akun','LIKE','51%')
                                   ->sum('total');
                 return($totals);
             })
             ->addColumn('total_belanja_barang', function($anggaran){
-                $totals = anggaran::where('thang', 2023)
+                $totals = Anggaran::where('thang', 2023)
                                   ->where('reffsatker_id', $anggaran->reffsatker_id)
                                   ->where('kode_akun','LIKE','52%')
                                   ->sum('total');
                 return($totals);
             })
             ->addColumn('total_belanja_modal', function($anggaran){
-                $totals = anggaran::where('thang', 2023)
+                $totals = Anggaran::where('thang', 2023)
                                   ->where('reffsatker_id', $anggaran->reffsatker_id)
                                   ->where('kode_akun','LIKE','53%')
                                   ->sum('total');
@@ -371,7 +371,7 @@ class ApiController extends Controller
     // Dokumen Pagu Anggaran 2023
     public function apiDokumenAnggaran()
     {
-        $dakung = anggaran::select(
+        $dakung = Anggaran::select(
                                     'reffsatker_id',
                                     'kode_program',
                                     'kode_kegiatan',
@@ -432,7 +432,7 @@ class ApiController extends Controller
     // Daftar Akun
     public function apiAkun()
     {
-        $akun = anggaran::selectRaw('kode_akun, SUM(total) as total')
+        $akun = Anggaran::selectRaw('kode_akun, SUM(total) as total')
                         ->where('thang', 2023)
                         ->groupBy('kode_akun')
                         ->orderBy('kode_akun','asc');
@@ -455,7 +455,7 @@ class ApiController extends Controller
     // Daftar Rincian Akun
     public function apiRincianAkun()
     {
-        $akun = anggaran::where('kode_akun', request('akun'))
+        $akun = Anggaran::where('kode_akun', request('akun'))
                         ->where('thang', 2023);
 
         $akun = $akun->with(['reffsatker']);
